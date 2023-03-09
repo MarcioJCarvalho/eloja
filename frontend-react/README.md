@@ -22,37 +22,37 @@ cp .env.example .env
 ### Inicia o front-end no modo desenvolvimento:
 
 ```bash
-yarn dev
+npm run dev
 ```
 
 ### Realiza o build do projeto typescript para javascript:
 
 ```bash
-yarn build
+npm run build
 ```
 
 ### Inicia o front-end buildado para javascript para averiguação:
 
 ```bash
-yarn preview
+npm run preview
 ```
 
 #### Verifica se o código desenvolvido está dentro das regras de padronização e estilização:
 
 ```bash
-yarn check:lint
+npm run check:lint
 ```
 
 #### Executa as possíveis correções das regras de padronização de código:
 
 ```bash
-yarn fix:lint
+npm run fix:lint
 ```
 
 #### Executa as possíveis correções de identação e estilos de código:
 
 ```bash
-yarn prettify
+npm run prettify
 ```
 
 ---
