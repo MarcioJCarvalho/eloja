@@ -4,18 +4,6 @@
 - ### Node: **18.13.0** ou LTS mais recente
 
 ---
-&nbsp;
-
-## **Setup inicial (criação do .env):**
-#### Antes de rodar os comandos, primeiramente crie uma cópia do `.env.example` e renomeie para `.env` preenchendo os campos de configuração do banco de dados:
-```bash
-cp .env.example .env
-```
-
-&nbsp;
-
----
-&nbsp;
 
 ## **Comandos úteis**
 
