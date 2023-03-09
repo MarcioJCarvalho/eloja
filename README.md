@@ -61,3 +61,16 @@ Os guias a seguir ilustram como usar alguns recursos de forma concreta:
     </tr>
 </table>
 
+### 🔩 Deploy 
+Para o deploy devemos extender nosso MainApplication SpringBootServiletInitializer
+```Java
+@SpringBootApplication
+public class CoreApplication extends SpringBootServletInitializer{
+
+    public static void main(String[] args) {
+        SpringApplication.run(CoreApplication.class, args);
+    }
+
+}
+```
+
