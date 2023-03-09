@@ -49,6 +49,7 @@ Os guias a seguir ilustram como usar alguns recursos de forma concreta:
      <td><a align="center" href="https://dev.mysql.com/downloads/mysql/">MySql</a></td>
      <td><a align="center" href="https://dev.mysql.com/downloads/mysql/">React</a></td>
      <td><a align="center" href="https://nodejs.org/ja/blog/release/v18.13.0">Node.JS</a></td>
+     <td><a align="center" href="https://maven.apache.org/download.cgi">Maven</a></td>
     </tr>
     <tr>
      <td align="center">19.0.2</td>
@@ -56,6 +57,7 @@ Os guias a seguir ilustram como usar alguns recursos de forma concreta:
      <td align="center">8.0.32</td>
      <td align="center">1</td>
      <td align="center">18.13.0</td>
+     <td align="center">3.9.0</td>
     </tr>
 </table>
 
