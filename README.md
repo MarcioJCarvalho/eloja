@@ -55,7 +55,7 @@ Os guias a seguir ilustram como usar alguns recursos de forma concreta:
      <td align="center">19.0.2</td>
      <td align="center">3.0.4</td>
      <td align="center">8.0.32</td>
-     <td align="center">1</td>
+     <td align="center">18.2.0</td>
      <td align="center">18.13.0</td>
      <td align="center">3.9.0</td>
     </tr>
