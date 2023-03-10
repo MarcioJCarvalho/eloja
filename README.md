@@ -17,7 +17,7 @@ Repositório destinado à disciplina de projeto integrador II do terceiro ano de
  - Product Owner - [Márcio José de Carvalho](https://github.com/MarcioJCarvalho)
  - Desenvolvedor - [Diogo M. França](https://github.com/diogo-meneses-franca)
  - Desenvolvedor - Pablo Henrique Lopes Feliciano
- - Desenvolvedor - Arthur Toyokawa
+ - Desenvolvedor - [Arthur Toyokawa](https://github.com/ArthurToyokawa)
  - Desenvolvedor - [Matheus Fugisaki](https://github.com/fugisakimatheus)
 ### 🗎 Documentações e Referências
 Para referência adicional, considere as seguintes seções:
