@@ -47,7 +47,7 @@ Os guias a seguir ilustram como usar alguns recursos de forma concreta:
      <td><a align="center" href="https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html">Java</a></td>
      <td><a align="center" href="https://spring.io/projects/spring-boot">Spring-Boot</a></td>
      <td><a align="center" href="https://dev.mysql.com/downloads/mysql/">MySql</a></td>
-     <td><a align="center" href="https://dev.mysql.com/downloads/mysql/">React</a></td>
+     <td><a align="center" href="https://reactjs.org/">React</a></td>
      <td><a align="center" href="https://nodejs.org/ja/blog/release/v18.13.0">Node.JS</a></td>
      <td><a align="center" href="https://maven.apache.org/download.cgi">Maven</a></td>
     </tr>
