@@ -16,7 +16,7 @@ Repositório destinado à disciplina de projeto integrador II do terceiro ano de
  - Scrum Master - [Yago dos Santos Macinelli](https://github.com/yamacinelli)
  - Product Owner - [Márcio José de Carvalho](https://github.com/MarcioJCarvalho)
  - Desenvolvedor - [Diogo M. França](https://github.com/diogo-meneses-franca)
- - Desenvolvedor - Pablo Henrique Lopes Feliciano
+ - Desenvolvedor - [Pablo Henrique Lopes Feliciano](https://github.com/PabloDomiciano)
  - Desenvolvedor - [Arthur Toyokawa](https://github.com/ArthurToyokawa)
  - Desenvolvedor - [Matheus Fugisaki](https://github.com/fugisakimatheus)
 ### 🗎 Documentações e Referências
