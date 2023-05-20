@@ -25,7 +25,7 @@ public class EnderecoService {
         enderecoRepository.delete(endereco);
     }
 
-    public List<Endereco> listar(){
+    public List<Endereco> listarTodos(){
         return enderecoRepository.findAll();
     }
 
