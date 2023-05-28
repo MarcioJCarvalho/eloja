@@ -16,8 +16,8 @@ Repositório destinado à disciplina de projeto integrador II do terceiro ano de
  - Scrum Master - [Yago dos Santos Macinelli](https://github.com/yamacinelli)
  - Product Owner - [Márcio José de Carvalho](https://github.com/MarcioJCarvalho)
  - Desenvolvedor - [Diogo M. França](https://github.com/diogo-meneses-franca)
- - Desenvolvedor - Pablo Henrique Lopes Feliciano
- - Desenvolvedor - Arthur Toyokawa
+ - Desenvolvedor - [Pablo Henrique Lopes Feliciano](https://github.com/PabloDomiciano)
+ - Desenvolvedor - [Arthur Toyokawa](https://github.com/ArthurToyokawa)
  - Desenvolvedor - [Matheus Fugisaki](https://github.com/fugisakimatheus)
 ### 🗎 Documentações e Referências
 Para referência adicional, considere as seguintes seções:
@@ -47,7 +47,7 @@ Os guias a seguir ilustram como usar alguns recursos de forma concreta:
      <td><a align="center" href="https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html">Java</a></td>
      <td><a align="center" href="https://spring.io/projects/spring-boot">Spring-Boot</a></td>
      <td><a align="center" href="https://dev.mysql.com/downloads/mysql/">MySql</a></td>
-     <td><a align="center" href="https://dev.mysql.com/downloads/mysql/">React</a></td>
+     <td><a align="center" href="https://reactjs.org/">React</a></td>
      <td><a align="center" href="https://nodejs.org/ja/blog/release/v18.13.0">Node.JS</a></td>
      <td><a align="center" href="https://maven.apache.org/download.cgi">Maven</a></td>
     </tr>
@@ -55,9 +55,22 @@ Os guias a seguir ilustram como usar alguns recursos de forma concreta:
      <td align="center">19.0.2</td>
      <td align="center">3.0.4</td>
      <td align="center">8.0.32</td>
-     <td align="center">1</td>
+     <td align="center">18.2.0</td>
      <td align="center">18.13.0</td>
      <td align="center">3.9.0</td>
     </tr>
 </table>
+
+### 🔩 Deploy 
+Para o deploy devemos extender nosso MainApplication SpringBootServiletInitializer
+```Java
+@SpringBootApplication
+public class CoreApplication extends SpringBootServletInitializer{
+
+    public static void main(String[] args) {
+        SpringApplication.run(CoreApplication.class, args);
+    }
+
+}
+```
 

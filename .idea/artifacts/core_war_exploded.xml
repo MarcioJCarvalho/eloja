@@ -78,7 +78,10 @@
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot:3.0.4" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-autoconfigure:3.0.4" />
           <element id="library" level="project" name="Maven: com.mysql:mysql-connector-j:8.0.32" />
+          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-tomcat:3.0.4" />
           <element id="library" level="project" name="Maven: jakarta.annotation:jakarta.annotation-api:2.1.1" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:10.1.5" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:10.1.5" />
           <element id="library" level="project" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:4.0.0" />
           <element id="library" level="project" name="Maven: jakarta.activation:jakarta.activation-api:2.1.1" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:6.0.6" />
