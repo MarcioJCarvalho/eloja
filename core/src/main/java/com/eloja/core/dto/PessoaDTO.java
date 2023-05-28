@@ -1,13 +1,10 @@
 package com.eloja.core.dto;
 
-import com.eloja.core.entity.Endereco;
-import com.eloja.core.entity.Telefone;
-
 import java.util.List;
 
 public class PessoaDTO {
-    private Endereco endereco;
+    private EnderecoDTO endereco;
 
-    private List<Telefone> telefones;
+    private List<TelefoneDTO> telefones;
 
 }

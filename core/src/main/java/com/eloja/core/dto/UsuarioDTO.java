@@ -1,7 +1,5 @@
 package com.eloja.core.dto;
 
-import com.eloja.core.entity.Fisica;
-import com.eloja.core.entity.Juridica;
 import jakarta.validation.constraints.NotBlank;
 
 public class UsuarioDTO {
@@ -13,7 +11,7 @@ public class UsuarioDTO {
     @NotBlank
     private String senha;
 
-    private Fisica fisica;
+    private FisicaDTO fisica;
 
-    private Juridica juridica;
+    private JuridicaDTO juridica;
 }
