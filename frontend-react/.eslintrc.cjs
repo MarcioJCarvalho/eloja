@@ -7,6 +7,9 @@ module.exports = {
     ecmaVersion: 13,
     sourceType: 'module',
   },
+  env: {
+    node: true,
+  },
   extends: [
     'prettier',
     'eslint:recommended',
