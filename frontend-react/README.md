@@ -1,6 +1,7 @@
 # **Front-end**
 
 ## **Configuração do ambiente**
+
 - ### Node: **18.13.0** ou LTS mais recente
 
 ---
@@ -49,5 +50,5 @@ npm run prettify
 
 ## **Extensões requeridas:**
 
-  - ### ESLint (<https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint>);
-  - ### Prettier (<https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>);
+- ### ESLint (<https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint>);
+- ### Prettier (<https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>);
