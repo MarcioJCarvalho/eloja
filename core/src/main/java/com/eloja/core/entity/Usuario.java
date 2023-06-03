@@ -11,11 +11,9 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @NotBlank
     @Column(nullable = false, unique = true)
     private String email;
 
-    @NotBlank
     @Column(nullable = false)
     private String senha;
 
