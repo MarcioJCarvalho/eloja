@@ -1,9 +1,11 @@
 package com.eloja.core.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
+@Data
 public class UsuarioDTO {
-    Integer id;
+    private Integer id;
 
     @NotBlank
     private String email;

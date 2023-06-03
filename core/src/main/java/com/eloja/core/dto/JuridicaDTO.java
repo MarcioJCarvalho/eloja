@@ -1,10 +1,11 @@
 package com.eloja.core.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
 import org.hibernate.validator.constraints.br.CNPJ;
-
-public class JuridicaDTO {
-    Integer id;
+@Data
+public class JuridicaDTO extends PessoaDTO{
+    private Integer id;
 
     @NotEmpty
     private String razaoSocial;

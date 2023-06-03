@@ -1,9 +1,12 @@
 package com.eloja.core.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
 
+@Data
 public class TelefoneDTO {
-    Integer id;
+
+    private Integer id;
 
     @NotEmpty
     private String numero;

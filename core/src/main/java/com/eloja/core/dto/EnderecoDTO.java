@@ -3,9 +3,11 @@ package com.eloja.core.dto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
+@Data
 public class EnderecoDTO {
-    Integer id;
+    private Integer id;
 
     @NotEmpty
     private String cep;

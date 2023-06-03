@@ -1,7 +1,9 @@
 package com.eloja.core.entity;
 
+import com.eloja.core.dto.UsuarioDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
@@ -17,9 +19,11 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Fisica fisica;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Juridica juridica;
+
+
 }

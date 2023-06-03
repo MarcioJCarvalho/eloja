@@ -2,10 +2,11 @@ package com.eloja.core.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
-
-public class FisicaDTO {
-    Integer id;
+@Data
+public class FisicaDTO extends PessoaDTO{
+    private Integer id;
 
     @NotBlank
     private String nome;
