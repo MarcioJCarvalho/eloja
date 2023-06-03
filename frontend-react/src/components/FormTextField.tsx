@@ -9,7 +9,7 @@ type FormTextFieldProps = {
   rules?: any;
 };
 
-const FormTextField = ({ control, name, label, rules = { required: true } }: FormTextFieldProps) => {
+const FormTextField = ({ control, name, label, rules = { required: 'Campo nao preenchido' } }: FormTextFieldProps) => {
   const {
     field: { ref, ...inputProps },
     fieldState: { error },
