@@ -1,6 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
+/* eslint-disable no-useless-escape */
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,15 +8,20 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import InputMask from 'react-input-mask';
+import { Controller, useForm } from 'react-hook-form';
+import FormTextField from '../components/FormTextField';
 
 export default function SignUp() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    control,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data: any) => {
+    console.log(data);
+    //criar empresa e mandar
   };
 
   return (
@@ -35,31 +38,73 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Cadastro empresa
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField name="nomeFantasia" required fullWidth id="nomeFantasia" label="Nome Fantasia" autoFocus />
+              <FormTextField name="nomeFantasia" label="nomeFantasia" control={control} />
             </Grid>
             <Grid item xs={12}>
-              <TextField required fullWidth id="razaoSocial" label="Razão Social" name="razaoSocial" />
+              <FormTextField name="razaoSocial" label="Razão Social" control={control} />
             </Grid>
             <Grid item xs={12}>
-              <InputMask mask="99.999.999/9999-99">
-                <TextField required fullWidth name="cnpj" label="cnpj" type="cnpj" id="cnpj" />
-              </InputMask>
+              <Controller
+                name="cnpj"
+                control={control}
+                defaultValue=""
+                render={({ field: { onChange, value } }) => (
+                  <InputMask mask="99.999.999/9999-99" value={value} onChange={onChange}>
+                    <TextField
+                      error={!!errors.cnpj?.message}
+                      label="CNPJ"
+                      variant="outlined"
+                      type="text"
+                      fullWidth
+                      required
+                    />
+                  </InputMask>
+                )}
+              />
             </Grid>
             <Grid item xs={12}>
-              <InputMask mask="999999999">
-                <TextField fullWidth id="inscricaoEstadual" label="Inscrição Estadual" name="inscricaoEstadual" />
-              </InputMask>
+              <Controller
+                name="inscricaoEstadual"
+                control={control}
+                defaultValue=""
+                render={({ field: { onChange, value } }) => (
+                  <InputMask mask="999999999" value={value} onChange={onChange}>
+                    <TextField
+                      error={!!errors.inscricaoEstadual?.message}
+                      label="Inscrição Estadual"
+                      variant="outlined"
+                      type="text"
+                      fullWidth
+                      required
+                    />
+                  </InputMask>
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} required {...register('endereço')}>
+              <TextField fullWidth id="endereço" label="Endereço" name="endereço" />
             </Grid>
             <Grid item xs={12}>
-              <TextField required fullWidth id="endereço" label="Endereço" name="endereço" />
-            </Grid>
-            <Grid item xs={12}>
-              <InputMask mask="(99)99999-9999">
-                <TextField required fullWidth id="telefones" label="Telefones" name="telefones" />
-              </InputMask>
+              <Controller
+                name="telefones"
+                control={control}
+                defaultValue=""
+                render={({ field: { onChange, value } }) => (
+                  <InputMask mask="(99)99999-9999" value={value} onChange={onChange}>
+                    <TextField
+                      error={!!errors.telefones?.message}
+                      label="Telefones"
+                      variant="outlined"
+                      type="text"
+                      fullWidth
+                      required
+                    />
+                  </InputMask>
+                )}
+              />
             </Grid>
             <Grid item container justifyContent="flex-end">
               <Button variant="contained"> Adicionar Telefone </Button>
@@ -68,7 +113,7 @@ export default function SignUp() {
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Cadastrar
           </Button>
-        </Box>
+        </form>
       </Box>
     </Container>
   );
