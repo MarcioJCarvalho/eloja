@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 function Home() {
   const navigate = useNavigate();
@@ -8,9 +9,9 @@ function Home() {
   }
 
   return (
-    <button type="button" onClick={handleClick}>
+    <Button variant="contained" onClick={handleClick}>
       Cadastro empresa
-    </button>
+    </Button>
   );
 }
 
