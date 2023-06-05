@@ -1,9 +1,9 @@
 class Endereco {
-  id: number;
+  id?: number;
   cep: string;
   logradouro: string;
   numero: string;
-  complemento: string;
+  complemento?: string;
   bairro: string;
   ibge: string;
   uf: string;

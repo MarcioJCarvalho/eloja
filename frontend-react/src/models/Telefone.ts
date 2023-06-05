@@ -1,5 +1,5 @@
 class Telefone {
-  id: number;
+  id?: number;
   numero: string;
 }
 

@@ -1,14 +1,16 @@
 /* eslint-disable no-useless-escape */
 import * as React from 'react';
+import { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import FormTextField from '../components/FormTextField';
 import FormMaskField from '../components/FormMaskField';
+import { buscarCep } from '../services/cepService';
 
 export default function SignUp() {
   const {
@@ -18,7 +20,23 @@ export default function SignUp() {
     control,
     formState: { errors },
   } = useForm();
+
+  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
+    control,
+    name: 'telefones',
+  });
+
+  useEffect(() => {
+    if (fields.length === 0) addTelefone();
+
+    buscarCep('87701100');
+  }, []);
+
   const onSubmit = (data: any) => console.log(data);
+
+  const addTelefone = () => {
+    append({ numero: '' });
+  };
 
   return (
     <Container component="main" maxWidth="md">
@@ -48,14 +66,24 @@ export default function SignUp() {
             <Grid item xs={12}>
               <FormMaskField name="inscricaoEstadual" label="Inscrição Estadual" control={control} mask="999999999" />
             </Grid>
-            <Grid item xs={12} required {...register('endereço')}>
+            <Grid item xs={12}>
               <FormTextField name="endereço" label="Endereço" control={control} />
             </Grid>
             <Grid item xs={12}>
-              <FormMaskField name="telefones" label="Telefones" control={control} mask="(99)99999-9999" />
+              {fields.map((field, index) => (
+                <FormMaskField
+                  key={field.id}
+                  name={`telefones[${index}].numero`}
+                  label={`telefone ${index + 1}`}
+                  control={control}
+                  mask="(99)99999-9999"
+                />
+              ))}
             </Grid>
             <Grid item container justifyContent="flex-end">
-              <Button variant="contained">Adicionar Telefone</Button>
+              <Button onClick={addTelefone} variant="contained">
+                Adicionar Telefone
+              </Button>
             </Grid>
             <Grid item container justifyContent="flex-end"></Grid>
           </Grid>

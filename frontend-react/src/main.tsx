@@ -6,12 +6,10 @@ import Home from './pages/Home';
 import CadastroEmpresa from './pages/CadastroEmpresa';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cadastro-empresa" element={<CadastroEmpresa />} />
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/cadastro-empresa" element={<CadastroEmpresa />} />
+    </Routes>
+  </BrowserRouter>,
 );

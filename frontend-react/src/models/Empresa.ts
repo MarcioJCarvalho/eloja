@@ -2,11 +2,11 @@ import Endereco from './Endereco';
 import Telefone from './Telefone';
 
 class Empresa {
-  id: number;
+  id?: number;
   razaoSocial: string;
   nomeFantasia: string;
   cnpj: string;
-  inscricao_estadual: string;
+  inscricao_estadual?: string;
   endereco: Endereco;
   telefones: Telefone[];
 }
