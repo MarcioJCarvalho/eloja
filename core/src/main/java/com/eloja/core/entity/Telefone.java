@@ -10,7 +10,6 @@ public class Telefone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @NotEmpty
     @Column(nullable = false)
     private String numero;
 }
