@@ -1,9 +1,9 @@
 package com.eloja.core.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
 
+@Data
 @Entity
 public class Telefone {
     @Id
