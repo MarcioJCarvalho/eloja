@@ -1,9 +1,6 @@
 package com.eloja.core.entity;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
@@ -12,11 +9,11 @@ import java.util.List;
 @MappedSuperclass
 public class Pessoa {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(nullable = false)
     private Endereco endereco;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "telefone", nullable = false)
     private List<Telefone> telefones;
 }

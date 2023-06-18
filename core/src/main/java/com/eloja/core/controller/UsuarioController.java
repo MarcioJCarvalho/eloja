@@ -1,18 +1,23 @@
 package com.eloja.core.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.eloja.core.dto.UsuarioDTO;
+import com.eloja.core.entity.Usuario;
+import com.eloja.core.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/usuarios")
 public class UsuarioController {
+
+    @Autowired
+    private UsuarioService usuarioService;
+
     @PostMapping
-    public String cadastrarUsuarioEmpresa(){
-        return "Sucess!!";
+    public Usuario salvar(@RequestBody UsuarioDTO usuarioDto){
+        return usuarioService.salvar(usuarioDto);
     }
+
 
 }
