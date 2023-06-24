@@ -13,19 +13,19 @@ export const getEmpresaById = async (id: number) => {
   });
 };
 
-export const salvarEmpresas = async (empresa: Empresa) => {
+export const salvarEmpresa = async (empresa: Empresa) => {
   return await api.post('/empresa', empresa).catch((err) => {
     console.error('ocorreu um erro' + err);
   });
 };
 
-export const atualizarEmpresas = async (empresa: Empresa) => {
+export const atualizarEmpresa = async (empresa: Empresa) => {
   return await api.put('/empresa', empresa).catch((err) => {
     console.error('ocorreu um erro' + err);
   });
 };
 
-export const deletarEmpresas = async (id: number) => {
+export const deletarEmpresa = async (id: number) => {
   return await api.delete(`/empresa/${id}`).catch((err) => {
     console.error('ocorreu um erro' + err);
   });
