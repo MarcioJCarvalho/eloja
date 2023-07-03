@@ -15,7 +15,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping
-    public Usuario salvar(@RequestBody UsuarioDTO usuarioDto){
+    public Usuario salvar(@RequestBody UsuarioDTO usuarioDto) {
         return usuarioService.salvar(usuarioDto);
     }
 

@@ -15,23 +15,24 @@ public class PermissaoService {
     @Autowired
     private PermissaoRepository permissaoRepository;
 
-    public PermissaoDTO salvar(PermissaoDTO permissao){
+    public PermissaoDTO salvar(PermissaoDTO permissao) {
         Permissao entidadePermissao = ParseUtils.parse(permissao, Permissao.class);
         PermissaoDTO permissaoDto = ParseUtils.parse(permissaoRepository.saveAndFlush(entidadePermissao), PermissaoDTO.class);
         return permissaoDto;
     }
 
-    public PermissaoDTO editar(PermissaoDTO permissao){
+    public PermissaoDTO editar(PermissaoDTO permissao) {
         Permissao entidadePermissao = ParseUtils.parse(permissao, Permissao.class);
         PermissaoDTO permissaoDto = ParseUtils.parse(permissaoRepository.saveAndFlush(entidadePermissao), PermissaoDTO.class);
         return permissaoDto;
     }
 
-    public void excluir(Integer id){
+    public void excluir(Integer id) {
         permissaoRepository.deleteById(id);
     }
 
-    public List<Permissao> listarTodos(){
-        return permissaoRepository.findAll();
+    public List<PermissaoDTO> listarTodos() {
+        return ParseUtils.parse(permissaoRepository.findAll(), PermissaoDTO.class);
+
     }
 }
