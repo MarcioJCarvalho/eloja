@@ -3,20 +3,22 @@ import * as React from 'react';
 import { Typography, Box, Container, Step, StepLabel, Stepper } from '@mui/material';
 
 import Juridica from '../models/Juridica';
+import Usuario from '../models/Usuario';
+import Fisica from '../models/Fisica';
 import Endereco from '../models/Endereco';
 import CadastroJuridica from '../components/CadastroJuridica';
 import CadastroFisica from '../components/CadastroFisica';
 
 export default function CadastroUsuario() {
-  const steps = ['Empresa', 'Usuario'];
+  const steps = ['Juridica', 'Usuario'];
   const [activeStep, setActiveStep] = React.useState(1);
-  const [empresa, setEmpresa] = React.useState<Juridica | null>(null);
+  const [juridica, setJuridica] = React.useState<Juridica | null>(null);
 
   const handleBackStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const onSubmitEmpresa = async (data: any) => {
+  const onSubmitJuridica = async (data: any) => {
     const { razaoSocial, nomeFantasia, cnpj, inscricao_estadual, endereco, telefones } = data;
     const enderecoObj = new Endereco(
       endereco.cep,
@@ -28,13 +30,27 @@ export default function CadastroUsuario() {
       endereco.uf,
     );
 
-    const empresa = new Juridica(razaoSocial, nomeFantasia, cnpj, inscricao_estadual, enderecoObj, telefones);
-    setEmpresa(empresa);
+    const juridica = new Juridica(razaoSocial, nomeFantasia, cnpj, inscricao_estadual, enderecoObj, telefones);
+    setJuridica(juridica);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const onSubmitUsuario = async (data: any) => {
-    // TODO criar usuario e salvar
+    const { nome, sobrenome, cpf, email, senha, endereco, telefones } = data;
+    const enderecoObj = new Endereco(
+      endereco.cep,
+      endereco.logradouro,
+      endereco.numero,
+      endereco.complemento,
+      endereco.bairro,
+      endereco.ibge,
+      endereco.uf,
+    );
+
+    const fisica = new Fisica(nome, sobrenome, cpf, enderecoObj, telefones);
+    if (juridica) {
+      const usuario = new Usuario(email, senha, fisica, juridica);
+    }
   };
 
   return (
@@ -65,7 +81,7 @@ export default function CadastroUsuario() {
           </Stepper>
         </Box>
         {activeStep === 0 ? (
-          <CadastroJuridica onSubmit={onSubmitEmpresa} />
+          <CadastroJuridica onSubmit={onSubmitJuridica} />
         ) : (
           <CadastroFisica onSubmit={onSubmitUsuario} onBack={handleBackStep} />
         )}

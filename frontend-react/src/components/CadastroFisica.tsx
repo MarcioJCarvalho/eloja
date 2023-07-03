@@ -50,7 +50,13 @@ export default function CadastroFisica(props: CadastroFisicaProps) {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <FormTextField name="nome" label="Nome Completo" control={control} />
+              <FormTextField name="nome" label="Nome" control={control} />
+            </Grid>
+            <Grid item xs={12}>
+              <FormTextField name="sobrenome" label="Sobrenome" control={control} />
+            </Grid>
+            <Grid item xs={12}>
+              <FormMaskField name="cpf" label="CPF" control={control} mask="999.999.999-99" />
             </Grid>
             <Grid item xs={12}>
               <FormTextField name="email" label="Email" control={control} />
