@@ -1,5 +1,5 @@
 import api from '../axios/Api';
-import Empresa from '../models/Empresa';
+import Juridica from '../models/Juridica';
 
 export const getAllEmpresas = async () => {
   return await api.get('/empresa').catch((err) => {
@@ -13,13 +13,13 @@ export const getEmpresaById = async (id: number) => {
   });
 };
 
-export const salvarEmpresa = async (empresa: Empresa) => {
+export const salvarEmpresa = async (empresa: Juridica) => {
   return await api.post('/empresa', empresa).catch((err) => {
     console.error('ocorreu um erro' + err);
   });
 };
 
-export const atualizarEmpresa = async (empresa: Empresa) => {
+export const atualizarEmpresa = async (empresa: Juridica) => {
   return await api.put('/empresa', empresa).catch((err) => {
     console.error('ocorreu um erro' + err);
   });

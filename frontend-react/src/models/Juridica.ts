@@ -1,7 +1,7 @@
 import Endereco from './Endereco';
 import Telefone from './Telefone';
 
-class Empresa {
+class Juridica {
   id?: number;
   razaoSocial: string;
   nomeFantasia: string;
@@ -29,4 +29,4 @@ class Empresa {
   }
 }
 
-export default Empresa;
+export default Juridica;

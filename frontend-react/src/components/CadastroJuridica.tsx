@@ -2,44 +2,27 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useFieldArray, useForm } from 'react-hook-form';
-import FormTextField from '../components/FormTextField';
-import FormNumberField from '../components/FormNumberField';
-import FormMaskField from '../components/FormMaskField';
+import FormTextField from './FormTextField';
+import FormNumberField from './FormNumberField';
+import FormMaskField from './FormMaskField';
 import { buscarCep } from '../services/cepService';
-import Empresa from '../models/Empresa';
-import Endereco from '../models/Endereco';
-import { salvarEmpresa } from '../services/empresaService';
 
-export default function SignUp() {
+type CadastroJuridicaProps = {
+  onSubmit: (data: any) => Promise<void>;
+};
+
+export default function CadastroJuridica(props: CadastroJuridicaProps) {
+  const { onSubmit } = props;
   const { handleSubmit, control, setValue } = useForm();
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'telefones',
   });
-
-  const onSubmit = async (data: any) => {
-    const { razaoSocial, nomeFantasia, cnpj, inscricao_estadual, endereco, telefones } = data;
-    const enderecoObj = new Endereco(
-      endereco.cep,
-      endereco.logradouro,
-      endereco.numero,
-      endereco.complemento,
-      endereco.bairro,
-      endereco.ibge,
-      endereco.uf,
-    );
-
-    const empresa = new Empresa(razaoSocial, nomeFantasia, cnpj, inscricao_estadual, enderecoObj, telefones);
-    //TODO QUANDO TIVER UM BACK LOCAL FUNCIONAL TRATAR A RESPONSE
-    const response = await salvarEmpresa(empresa);
-  };
 
   const addTelefone = () => {
     append({ numero: '' });
@@ -56,7 +39,6 @@ export default function SignUp() {
 
   return (
     <Container component="main" maxWidth="md">
-      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
@@ -65,19 +47,16 @@ export default function SignUp() {
           alignItems: 'center',
         }}
       >
-        <Typography component="h1" variant="h5">
-          Cadastro empresa
-        </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <FormTextField name="nomeFantasia" label="nomeFantasia" control={control} />
+              <FormTextField name="nomeFantasia" label="Nome Fantasia" control={control} />
             </Grid>
             <Grid item xs={12}>
               <FormTextField name="razaoSocial" label="Razão Social" control={control} />
             </Grid>
             <Grid item xs={12}>
-              <FormMaskField name="cnpj" label="cnpj" control={control} mask="99.999.999/9999-99" />
+              <FormMaskField name="cnpj" label="CNPJ" control={control} mask="99.999.999/9999-99" />
             </Grid>
             <Grid item xs={12}>
               <FormMaskField
@@ -89,7 +68,7 @@ export default function SignUp() {
               />
             </Grid>
             <Grid item xs={12}>
-              <FormMaskField onBlur={handleCep} name="endereco.cep" label="cep" control={control} mask="99999-999" />
+              <FormMaskField onBlur={handleCep} name="endereco.cep" label="CEP" control={control} mask="99999-999" />
             </Grid>
             <Grid item xs={12}>
               <FormTextField name="endereco.logradouro" label="Logradouro" control={control} />
@@ -109,17 +88,17 @@ export default function SignUp() {
               <FormTextField name="endereco.bairro" label="Bairro" control={control} />
             </Grid>
             <Grid item xs={12}>
-              <FormTextField name="endereco.ibge" label="ibge" control={control} />
+              <FormTextField name="endereco.ibge" label="IBGE" control={control} />
             </Grid>
             <Grid item xs={12}>
-              <FormTextField name="endereco.uf" label="uf" control={control} />
+              <FormTextField name="endereco.uf" label="UF" control={control} />
             </Grid>
             {fields.map((field, index) => (
               <>
                 <Grid item xs={index > 0 ? 9 : 12} key={field.id}>
                   <FormMaskField
                     name={`telefones[${index}].numero`}
-                    label={`telefone ${index + 1}`}
+                    label={'Telefone'}
                     control={control}
                     mask="(99)99999-9999"
                   />
@@ -142,9 +121,13 @@ export default function SignUp() {
             </Grid>
             <Grid item container justifyContent="flex-end"></Grid>
           </Grid>
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Cadastrar
-          </Button>
+          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Button color="inherit" disabled={true} sx={{ mr: 1 }}>
+              Voltar
+            </Button>
+            <Box sx={{ flex: '1 1 auto' }} />
+            <Button type="submit">Proximo</Button>
+          </Box>
         </form>
       </Box>
     </Container>
