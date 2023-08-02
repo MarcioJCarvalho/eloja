@@ -8,10 +8,11 @@ import Fisica from '../models/Fisica';
 import Endereco from '../models/Endereco';
 import CadastroJuridica from '../components/CadastroJuridica';
 import CadastroFisica from '../components/CadastroFisica';
+import { salvarUsuario } from '../services/UsuarioService';
 
 export default function CadastroUsuario() {
   const steps = ['Juridica', 'Usuario'];
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
   const [juridica, setJuridica] = React.useState<Juridica | null>(null);
 
   const handleBackStep = () => {
@@ -50,6 +51,7 @@ export default function CadastroUsuario() {
     const fisica = new Fisica(nome, sobrenome, cpf, enderecoObj, telefones);
     if (juridica) {
       const usuario = new Usuario(email, senha, fisica, juridica);
+      salvarUsuario(usuario);
     }
   };
 
@@ -81,7 +83,7 @@ export default function CadastroUsuario() {
           </Stepper>
         </Box>
         {activeStep === 0 ? (
-          <CadastroJuridica onSubmit={onSubmitJuridica} />
+          <CadastroJuridica juridica={juridica} onSubmit={onSubmitJuridica} />
         ) : (
           <CadastroFisica onSubmit={onSubmitUsuario} onBack={handleBackStep} />
         )}

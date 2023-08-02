@@ -7,9 +7,16 @@ type FormTextFieldProps = {
   name: string;
   label: string;
   rules?: any;
+  type?: string;
 };
 
-const FormTextField = ({ control, name, label, rules = { required: 'Campo nao preenchido' } }: FormTextFieldProps) => {
+const FormTextField = ({
+  control,
+  name,
+  label,
+  rules = { required: 'Campo nao preenchido' },
+  type = 'string',
+}: FormTextFieldProps) => {
   const {
     field: { ref, ...inputProps },
     fieldState: { error },
@@ -22,6 +29,7 @@ const FormTextField = ({ control, name, label, rules = { required: 'Campo nao pr
   return (
     <TextField
       fullWidth
+      type={type}
       id={name}
       label={label}
       error={!!error}
