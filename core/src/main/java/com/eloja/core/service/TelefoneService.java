@@ -1,31 +1,19 @@
 package com.eloja.core.service;
 
-import com.eloja.core.entity.Telefone;
-import com.eloja.core.repository.TelefoneRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.eloja.core.dto.TelefoneDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class TelefoneService {
-    @Autowired
-    private TelefoneRepository telefoneRepository;
+public interface TelefoneService {
 
-    public Telefone salvar(Telefone telefone){
-        return telefoneRepository.saveAndFlush(telefone);
-    }
+    ResponseEntity<TelefoneDTO> salvar(TelefoneDTO telefoneDTO);
 
-    public Telefone editar(Telefone telefone){
-        return telefoneRepository.saveAndFlush(telefone);
-    }
+    ResponseEntity<TelefoneDTO> editar(TelefoneDTO telefoneDTO);
 
-    public void excluir(Integer id){
-        Telefone telefone = telefoneRepository.findById(id).get();
-        telefoneRepository.delete(telefone);
-    }
+    ResponseEntity<String> excluir(Integer telefoneId);
 
-    public List<Telefone> listarTodos(){
-        return telefoneRepository.findAll();
-    }
+    Page<TelefoneDTO> listarTodos(Pageable pageable);
 }

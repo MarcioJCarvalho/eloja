@@ -10,19 +10,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
     private UsuarioService usuarioService;
-
+    @Autowired
     public UsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> salvar(@RequestBody UsuarioDTO usuarioDto){
-        return usuarioService.salvar(usuarioDto);
+    public ResponseEntity<UsuarioDTO> salvar(@RequestBody UsuarioDTO usuarioDTO){
+        return usuarioService.salvar(usuarioDTO);
     }
 
     @PutMapping

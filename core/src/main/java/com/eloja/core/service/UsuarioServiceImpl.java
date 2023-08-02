@@ -20,7 +20,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
     @Autowired
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+    protected UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 

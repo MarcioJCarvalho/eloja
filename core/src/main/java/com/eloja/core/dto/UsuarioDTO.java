@@ -10,6 +10,8 @@ public class UsuarioDTO {
     @NotBlank
     private String email;
 
+    private String senha;
+
     private FisicaDTO fisica;
 
     private JuridicaDTO juridica;

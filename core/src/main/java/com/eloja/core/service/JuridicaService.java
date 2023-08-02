@@ -1,32 +1,19 @@
 package com.eloja.core.service;
 
-import com.eloja.core.entity.Juridica;
-import com.eloja.core.repository.JuridicaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.eloja.core.dto.JuridicaDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class JuridicaService {
-    @Autowired
-    private JuridicaRepository juridicaRepository;
+public interface JuridicaService{
 
-    public Juridica salvar(Juridica juridica){
-        return juridicaRepository.saveAndFlush(juridica);
-    }
+    ResponseEntity<JuridicaDTO> salvar(JuridicaDTO juridicaDTO);
 
-    public Juridica editar(Juridica juridica){
-        return juridicaRepository.saveAndFlush(juridica);
-    }
+    ResponseEntity<JuridicaDTO> editar(JuridicaDTO juridicaDTO);
 
-    public void excluir(Integer id){
-        Juridica juridica = juridicaRepository.findById(id).get();
-        juridicaRepository.delete(juridica);
+    ResponseEntity<String> excluir(Integer juridicaId);
 
-    }
-
-    public List<Juridica> listarTodos(){
-        return juridicaRepository.findAll();
-    }
+    Page<JuridicaDTO> listarTodos(Pageable pageable);
 }
