@@ -1,7 +1,9 @@
 package com.eloja.core.entity;
 
+import com.eloja.core.dto.UsuarioDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
@@ -11,17 +13,17 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @NotBlank
     @Column(nullable = false, unique = true)
     private String email;
 
-    @NotBlank
     @Column(nullable = false)
     private String senha;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Fisica fisica;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Juridica juridica;
+
+
 }
