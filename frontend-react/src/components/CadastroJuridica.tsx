@@ -10,13 +10,15 @@ import FormTextField from './FormTextField';
 import FormNumberField from './FormNumberField';
 import FormMaskField from './FormMaskField';
 import { buscarCep } from '../services/cepService';
+import Juridica from '../models/Juridica';
 
 type CadastroJuridicaProps = {
   onSubmit: (data: any) => Promise<void>;
+  juridica: Juridica | null;
 };
 
 export default function CadastroJuridica(props: CadastroJuridicaProps) {
-  const { onSubmit } = props;
+  const { onSubmit, juridica } = props;
   const { handleSubmit, control, setValue } = useForm();
 
   const { fields, append, remove } = useFieldArray({
@@ -30,6 +32,14 @@ export default function CadastroJuridica(props: CadastroJuridicaProps) {
 
   useEffect(() => {
     if (fields.length === 0) addTelefone();
+    if (juridica) {
+      setValue('endereco', juridica.endereco);
+      setValue('razaoSocial', juridica.razaoSocial);
+      setValue('nomeFantasia', juridica.nomeFantasia);
+      setValue('cnpj', juridica.cnpj);
+      setValue('inscricao_estadual', juridica.inscricao_estadual);
+      setValue('telefones', juridica.telefones);
+    }
   }, []);
 
   const handleCep = async (evt: any) => {
@@ -60,7 +70,7 @@ export default function CadastroJuridica(props: CadastroJuridicaProps) {
             </Grid>
             <Grid item xs={12}>
               <FormMaskField
-                name="inscricaoEstadual"
+                name="inscricao_estadual"
                 label="Inscrição Estadual"
                 control={control}
                 mask="999999999"

@@ -62,7 +62,7 @@ export default function CadastroFisica(props: CadastroFisicaProps) {
               <FormTextField name="email" label="Email" control={control} />
             </Grid>
             <Grid item xs={12}>
-              <FormTextField name="senha" label="Senha" control={control} />
+              <FormTextField type="password" name="senha" label="Senha" control={control} />
             </Grid>
             <Grid item xs={12}>
               <FormMaskField onBlur={handleCep} name="endereco.cep" label="CEP" control={control} mask="99999-999" />

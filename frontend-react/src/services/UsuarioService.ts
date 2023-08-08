@@ -1,5 +1,5 @@
 import api from '../axios/Api';
-import Juridica from '../models/Juridica';
+import Usuario from '../models/Usuario';
 
 export const getAllUsuarios = async () => {
   return await api.get('/usuario').catch((err) => {
@@ -13,13 +13,13 @@ export const getUsuarioById = async (id: number) => {
   });
 };
 
-export const salvarUsuario = async (usuario: Juridica) => {
+export const salvarUsuario = async (usuario: Usuario) => {
   return await api.post('/usuario', usuario).catch((err) => {
     console.error('ocorreu um erro' + err);
   });
 };
 
-export const atualizarUsuario = async (usuario: Juridica) => {
+export const atualizarUsuario = async (usuario: Usuario) => {
   return await api.put('/usuario', usuario).catch((err) => {
     console.error('ocorreu um erro' + err);
   });
