@@ -10,11 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import java.util.function.Function;
 
 @Service
 public class EnderecoServiceImpl implements EnderecoService {
-    private EnderecoRepository enderecoRepository;
+    private final EnderecoRepository enderecoRepository;
 
     @Autowired
     protected EnderecoServiceImpl(EnderecoRepository enderecoRepository){
@@ -34,22 +33,18 @@ public class EnderecoServiceImpl implements EnderecoService {
     }
 
     public ResponseEntity<String> excluir(Integer enderecoId){
+
         Endereco endereco = enderecoRepository.findById(enderecoId).get();
         enderecoRepository.delete(endereco);
         return new ResponseEntity<>("Cadastro excluído com sucesso!", HttpStatus.OK);
     }
 
-    public Page<EnderecoDTO> listarTodos(Pageable pageable){
+    public ResponseEntity<Page<EnderecoDTO>> listarTodos(Pageable pageable){
         Page<Endereco> enderecoPage = enderecoRepository.findAll(pageable);
-        Page<EnderecoDTO> enderecoDTOPage = enderecoPage.map(
-                new Function<>() {
-                    @Override
-                    public EnderecoDTO apply(Endereco endereco) {
-                        return ParseUtils.parse(endereco, EnderecoDTO.class);
-                    }
-                }
+        Page<EnderecoDTO> resultadoDTO = enderecoPage.map(
+                endereco -> ParseUtils.parse(endereco, EnderecoDTO.class)
         );
-        return  enderecoDTOPage;
+        return new ResponseEntity<>(resultadoDTO, HttpStatus.OK);
     }
 
 

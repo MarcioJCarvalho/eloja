@@ -15,5 +15,5 @@ public interface TelefoneService {
 
     ResponseEntity<String> excluir(Integer telefoneId);
 
-    Page<TelefoneDTO> listarTodos(Pageable pageable);
+    ResponseEntity<Page<TelefoneDTO>> listarTodos(Pageable pageable);
 }

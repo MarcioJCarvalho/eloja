@@ -11,13 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.function.Function;
-
 @Service
 public class FisicaServiceImpl implements FisicaService{
 
-    private FisicaRepository fisicaRepository;
+    private final FisicaRepository fisicaRepository;
     @Autowired
     protected FisicaServiceImpl(FisicaRepository fisicaRepository){
         this.fisicaRepository = fisicaRepository;
@@ -41,16 +38,12 @@ public class FisicaServiceImpl implements FisicaService{
         return new ResponseEntity<>("Cadastro excluído com sucesso!", HttpStatus.OK);
     }
 
-    public Page<FisicaDTO> listarTodos(Pageable pageable){
+    public ResponseEntity<Page<FisicaDTO>> listarTodos(Pageable pageable){
         Page<Fisica> fisicaPage = fisicaRepository.findAll(pageable);
-        Page<FisicaDTO> fisicaDTOPage = fisicaPage.map(
-                new Function<>() {
-                    public FisicaDTO apply(Fisica fisica){
-                        return ParseUtils.parse(fisica, FisicaDTO.class);
-                    }
-                }
+        Page<FisicaDTO> resultadoDTO = fisicaPage.map(
+                fisica -> ParseUtils.parse(fisica, FisicaDTO.class)
         );
-        return fisicaDTOPage;
+        return new ResponseEntity<>(resultadoDTO, HttpStatus.OK);
 
     }
 }

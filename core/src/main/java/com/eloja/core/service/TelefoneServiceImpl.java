@@ -11,11 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.function.Function;
-
 @Service
 public class TelefoneServiceImpl implements TelefoneService{
-    private TelefoneRepository telefoneRepository;
+    private final TelefoneRepository telefoneRepository;
     @Autowired
     protected TelefoneServiceImpl(TelefoneRepository telefoneRepository){
         this.telefoneRepository= telefoneRepository;
@@ -41,18 +39,12 @@ public class TelefoneServiceImpl implements TelefoneService{
         return new ResponseEntity<>("Telefone excluído com sucesso", HttpStatus.OK);
     }
 
-    public Page<TelefoneDTO> listarTodos(Pageable pageable){
+    public ResponseEntity<Page<TelefoneDTO>> listarTodos(Pageable pageable){
 
         Page<Telefone> resultado = telefoneRepository.findAll(pageable);
-        Page<TelefoneDTO> resultadoDTO = resultado.map(
-                new Function<>() {
-                    @Override
-                public TelefoneDTO apply(Telefone telefone){
-                    return ParseUtils.parse(telefone, TelefoneDTO.class);
-
-                 }
-            }
+        Page<TelefoneDTO> resultadoDTO =  resultado.map(
+                telefone -> ParseUtils.parse(telefone, TelefoneDTO.class)
         );
-        return resultadoDTO;
+        return new ResponseEntity<>(resultadoDTO, HttpStatus.OK);
     }
 }

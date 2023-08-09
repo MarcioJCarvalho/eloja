@@ -11,12 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.function.Function;
-
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
 
     @Autowired
@@ -36,23 +34,19 @@ public class UsuarioServiceImpl implements UsuarioService {
         return new ResponseEntity<>(usuarioDTORetorno, HttpStatus.OK);
     }
 
-    public ResponseEntity<String> excluir(Integer id) {
-        usuarioRepository.deleteById(id);
+    public ResponseEntity<String> excluir(Integer usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId).get();
+        usuarioRepository.delete(usuario);
         return new ResponseEntity<>("Usuário excluido com sucesso!", HttpStatus.OK);
     }
 
 
-    public Page<UsuarioDTO> listarTodos(Pageable pageable) {
+    public ResponseEntity<Page<UsuarioDTO>> listarTodos(Pageable pageable) {
         Page<Usuario> resultado = usuarioRepository.findAll(pageable);
-        Page<UsuarioDTO> resultadoDTO = resultado.map(
-                new Function<>() {
-                    @Override
-                    public UsuarioDTO apply(Usuario usuario) {
-                        return ParseUtils.parse(usuario, UsuarioDTO.class);
-                    }
-                }
+        Page<UsuarioDTO> resultadoDTO =  resultado.map(
+                usuario -> ParseUtils.parse(usuario, UsuarioDTO.class)
         );
-        return resultadoDTO;
+        return new ResponseEntity<>(resultadoDTO, HttpStatus.OK);
     }
 
 

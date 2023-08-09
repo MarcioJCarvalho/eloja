@@ -15,5 +15,5 @@ public interface FisicaService {
 
     ResponseEntity<String> excluir(Integer fisicaId);
 
-    Page<FisicaDTO> listarTodos(Pageable pageable);
+    ResponseEntity<Page<FisicaDTO>> listarTodos(Pageable pageable);
 }

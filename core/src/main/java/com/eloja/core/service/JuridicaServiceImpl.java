@@ -11,13 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.function.Function;
-
 
 @Service
 public class JuridicaServiceImpl implements JuridicaService {
 
-    private JuridicaRepository juridicaRepository;
+    private final JuridicaRepository juridicaRepository;
 
     @Autowired
     protected JuridicaServiceImpl(JuridicaRepository juridicaRepository){
@@ -43,17 +41,13 @@ public class JuridicaServiceImpl implements JuridicaService {
 
     }
 
-    public Page<JuridicaDTO> listarTodos(Pageable pageable){
+    public ResponseEntity<Page<JuridicaDTO>> listarTodos(Pageable pageable){
         Page<Juridica> juridicaPage = juridicaRepository.findAll(pageable);
-        Page<JuridicaDTO> juridicaDTOPage = juridicaPage.map(
-                new Function<>(){
-                    public JuridicaDTO apply(Juridica juridica){
-                        return ParseUtils.parse(juridica, JuridicaDTO.class);
-                    }
-                }
+        Page<JuridicaDTO> resultadoDTO =  juridicaPage.map(
+                juridica -> ParseUtils.parse(juridica, JuridicaDTO.class)
 
         );
-        return juridicaDTOPage;
+        return new ResponseEntity<>(resultadoDTO, HttpStatus.OK);
 
     }
 }

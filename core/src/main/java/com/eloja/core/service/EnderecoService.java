@@ -15,5 +15,5 @@ public interface EnderecoService {
 
     ResponseEntity<String> excluir(Integer enderecoId);
 
-    Page<EnderecoDTO> listarTodos(Pageable pageable);
+    ResponseEntity<Page<EnderecoDTO>> listarTodos(Pageable pageable);
 }

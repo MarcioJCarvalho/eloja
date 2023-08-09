@@ -1,7 +1,6 @@
 package com.eloja.core.controller;
 
 import com.eloja.core.dto.UsuarioDTO;
-import com.eloja.core.entity.Usuario;
 import com.eloja.core.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
     @Autowired
     public UsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
@@ -35,7 +34,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public Page<UsuarioDTO> listarTodos(Pageable pageable){
+    public ResponseEntity<Page<UsuarioDTO>> listarTodos(Pageable pageable){
         return usuarioService.listarTodos(pageable);
     }
 

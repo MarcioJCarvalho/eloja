@@ -15,5 +15,5 @@ public interface JuridicaService{
 
     ResponseEntity<String> excluir(Integer juridicaId);
 
-    Page<JuridicaDTO> listarTodos(Pageable pageable);
+    ResponseEntity<Page<JuridicaDTO>> listarTodos(Pageable pageable);
 }
