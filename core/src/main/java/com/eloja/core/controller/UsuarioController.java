@@ -1,11 +1,9 @@
 package com.eloja.core.controller;
 
 import com.eloja.core.dto.UsuarioDTO;
+import com.eloja.core.entity.Usuario;
 import com.eloja.core.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

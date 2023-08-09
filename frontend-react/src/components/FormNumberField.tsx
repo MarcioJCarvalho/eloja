@@ -2,21 +2,19 @@ import React from 'react';
 import { TextField } from '@mui/material';
 import { Control, FieldValues, useController } from 'react-hook-form';
 
-type FormTextFieldProps = {
+type FormNumberFieldProps = {
   control: Control<FieldValues, any>;
   name: string;
   label: string;
   rules?: any;
-  type?: string;
 };
 
-const FormTextField = ({
+const FormNumberField = ({
   control,
   name,
   label,
   rules = { required: 'Campo nao preenchido' },
-  type = 'string',
-}: FormTextFieldProps) => {
+}: FormNumberFieldProps) => {
   const {
     field: { ref, ...inputProps },
     fieldState: { error },
@@ -29,7 +27,7 @@ const FormTextField = ({
   return (
     <TextField
       fullWidth
-      type={type}
+      type="number"
       id={name}
       label={label}
       error={!!error}
@@ -37,8 +35,13 @@ const FormTextField = ({
       inputRef={ref}
       {...inputProps}
       value={inputProps.value ? inputProps.value : ''}
+      onKeyDown={(e) => {
+        if (e.key === 'e' || e.key === 'E' || e.key === '-' || e.key === '+') {
+          e.preventDefault();
+        }
+      }}
     />
   );
 };
 
-export default FormTextField;
+export default FormNumberField;

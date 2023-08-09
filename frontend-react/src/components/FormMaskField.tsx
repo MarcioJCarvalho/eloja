@@ -9,6 +9,7 @@ type FormMaskFieldProps = {
   mask: string;
   label: string;
   rules?: any;
+  onBlur?: any;
 };
 
 const FormMaskField = ({
@@ -22,6 +23,7 @@ const FormMaskField = ({
       FilledInput: (v: string) => !/[_]/.test(v) || 'Campo não preenchido',
     },
   },
+  onBlur,
 }: FormMaskFieldProps) => {
   return (
     <Controller
@@ -30,7 +32,7 @@ const FormMaskField = ({
       defaultValue=""
       rules={rules}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <InputMask mask={mask} value={value} onChange={onChange}>
+        <InputMask mask={mask} value={value} onChange={onChange} onBlur={onBlur}>
           <TextField
             label={label}
             variant="outlined"
