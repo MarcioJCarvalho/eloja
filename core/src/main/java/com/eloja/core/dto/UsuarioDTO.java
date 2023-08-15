@@ -10,10 +10,11 @@ public class UsuarioDTO {
     @NotBlank
     private String email;
 
-    @NotBlank
     private String senha;
 
     private FisicaDTO fisica;
 
     private JuridicaDTO juridica;
+
+
 }

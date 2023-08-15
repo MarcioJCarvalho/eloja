@@ -1,34 +1,18 @@
 package com.eloja.core.service;
 
 import com.eloja.core.dto.UsuarioDTO;
-import com.eloja.core.entity.Usuario;
-import com.eloja.core.repository.UsuarioRepository;
-import com.eloja.core.utils.ParseUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class UsuarioService {
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+public interface UsuarioService {
+    ResponseEntity<UsuarioDTO> salvar(UsuarioDTO usuarioDTO);
 
-    public Usuario salvar(UsuarioDTO usuarioDTO){
-        return usuarioRepository.saveAndFlush(ParseUtils.parse(usuarioDTO, Usuario.class));
-    }
+    ResponseEntity<UsuarioDTO> editar(UsuarioDTO usuarioDTO);
 
-    public Usuario editar(UsuarioDTO usuarioDTO){
-        return usuarioRepository.saveAndFlush(ParseUtils.parse(usuarioDTO, Usuario.class));
-    }
+    ResponseEntity<String> excluir(Integer usuarioId);
 
-    public void excluir(Integer id){
-        Usuario usuario =  usuarioRepository.findById(id).get();
-        usuarioRepository.delete(usuario);
-    }
-
-    public List<Usuario> listarTodos(){
-       return usuarioRepository.findAll();
-
-    }
+    ResponseEntity<Page<UsuarioDTO>> listarTodos(Pageable pageable);
 }

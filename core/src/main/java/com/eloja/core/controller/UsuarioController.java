@@ -1,21 +1,42 @@
 package com.eloja.core.controller;
 
 import com.eloja.core.dto.UsuarioDTO;
-import com.eloja.core.entity.Usuario;
 import com.eloja.core.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
+    private final UsuarioService usuarioService;
     @Autowired
-    private UsuarioService usuarioService;
+    public UsuarioController(UsuarioService usuarioService){
+        this.usuarioService = usuarioService;
+    }
 
     @PostMapping
-    public Usuario salvar(@RequestBody UsuarioDTO usuarioDto) {
-        return usuarioService.salvar(usuarioDto);
+    public ResponseEntity<UsuarioDTO> salvar(@RequestBody UsuarioDTO usuarioDTO){
+        return usuarioService.salvar(usuarioDTO);
     }
+
+    @PutMapping
+    public ResponseEntity<UsuarioDTO> editar(@RequestBody UsuarioDTO usuarioDTO){
+        return usuarioService.editar(usuarioDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> excluir(@PathVariable("id") Integer usuarioId){
+        return usuarioService.excluir(usuarioId);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<UsuarioDTO>> listarTodos(Pageable pageable){
+        return usuarioService.listarTodos(pageable);
+    }
+
+
 }

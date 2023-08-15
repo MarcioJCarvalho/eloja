@@ -1,33 +1,19 @@
 package com.eloja.core.service;
 
-import com.eloja.core.entity.Endereco;
-import com.eloja.core.repository.EnderecoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.eloja.core.dto.EnderecoDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class EnderecoService {
-    @Autowired
-    private EnderecoRepository enderecoRepository;
+public interface EnderecoService {
 
-    public Endereco salvar(Endereco endereco){
-        return enderecoRepository.saveAndFlush(endereco);
-    }
+    ResponseEntity<EnderecoDTO> salvar(EnderecoDTO enderecoDTO);
 
-    public Endereco editar(Endereco endereco){
-        return enderecoRepository.saveAndFlush(endereco);
-    }
+    ResponseEntity<EnderecoDTO> editar(EnderecoDTO enderecoDTO);
 
-    public void excluir(Integer id){
-        Endereco endereco = enderecoRepository.findById(id).get();
-        enderecoRepository.delete(endereco);
-    }
+    ResponseEntity<String> excluir(Integer enderecoId);
 
-    public List<Endereco> listarTodos(){
-        return enderecoRepository.findAll();
-    }
-
-
+    ResponseEntity<Page<EnderecoDTO>> listarTodos(Pageable pageable);
 }

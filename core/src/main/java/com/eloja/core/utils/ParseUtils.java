@@ -3,14 +3,20 @@ package com.eloja.core.utils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
+@Component
 public class ParseUtils {
 
-    private static ModelMapper modelMapper = new ModelMapper();
+    private static ModelMapper modelMapper;
+
+    public ParseUtils(ModelMapper modelMapper){
+        this.modelMapper = modelMapper;
+    }
 
     /***
      * Método responsável por converter/mapear um objeto para uma determinada classe

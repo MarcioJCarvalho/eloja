@@ -1,31 +1,19 @@
 package com.eloja.core.service;
 
-import com.eloja.core.entity.Fisica;
-import com.eloja.core.repository.FisicaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.eloja.core.dto.FisicaDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class FisicaService {
-    @Autowired
-    private FisicaRepository fisicaRepository;
+public interface FisicaService {
 
-    public Fisica salvar(Fisica fisica){
-       return fisicaRepository.saveAndFlush(fisica);
-    }
+    ResponseEntity<FisicaDTO> salvar(FisicaDTO fisicaDTO);
 
-    public Fisica editar(Fisica fisica){
-        return fisicaRepository.saveAndFlush(fisica);
-    }
+    ResponseEntity<FisicaDTO> editar(FisicaDTO fisicaDTO);
 
-    public void excluir(Integer id){
-        Fisica fisica = fisicaRepository.findById(id).get();
-        fisicaRepository.delete(fisica);
-    }
+    ResponseEntity<String> excluir(Integer fisicaId);
 
-    public List<Fisica> listarTodos(){
-        return fisicaRepository.findAll();
-    }
+    ResponseEntity<Page<FisicaDTO>> listarTodos(Pageable pageable);
 }
