@@ -5,41 +5,36 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableContainer,
-  TableHead,
+  TableContainer, TableFooter,
+  TableHead, TablePagination,
   TableRow,
   Typography
 } from "@mui/material";
 import * as React from "react";
-import Usuario from "../models/Usuario";
 import {Component} from "react";
 import {getAllUsuarios} from "../services/UsuarioService";
-import Fisica from "../models/Fisica";
-import Endereco from "../models/Endereco";
+import {DataSource} from "../models/DataSource";
 
-export class Usuarios extends Component {
+export class Usuarios extends Component<any, any> {
 
-  private rows: Usuario[] = [
-    new Usuario(
-      'yagom.ym@gmail.com',
-      null,
-      new Fisica(
-        'Yago',
-        'Macinelli',
-        '11100022233',
-        null,
-        null,
-        null),
-      null,
-      1
-    )
-  ];
+  state = {
+    dataSource: new DataSource()
+  }
 
   componentDidMount() {
     getAllUsuarios()
-      .then(response => {
-        console.log(response);
+      .then((response) => {
+        console.log(response?.data);
+        this.setDataSource(response?.data);
       });
+  }
+
+  setDataSource(data: DataSource): void {
+    this.setState({dataSource: data});
+  }
+
+  getDataSource(): DataSource {
+    return this.state.dataSource;
   }
 
   render() {
@@ -65,14 +60,24 @@ export class Usuarios extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.rows.map(row => (
+              {this.getDataSource().content.map(row => (
                 <TableRow key={row.id}>
+                  <TableCell>{row.id}</TableCell>
                   <TableCell>{row.fisica.nome} {row.fisica.sobrenome}</TableCell>
                   <TableCell>{row.email}</TableCell>
                   <TableCell>{row.fisica.cpf}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  count={this.getDataSource().totalElements}
+                  page={this.getDataSource().number}
+                  rowsPerPage={this.getDataSource().numberOfElements}
+                  onPageChange={() => console.log('Altera pagina')}/>
+              </TableRow>
+            </TableFooter>
           </Table>
         </TableContainer>
       </Box>
