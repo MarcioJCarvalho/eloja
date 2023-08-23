@@ -6,17 +6,19 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { useFieldArray, useForm } from 'react-hook-form';
-import FormTextField from './FormTextField';
-import FormNumberField from './FormNumberField';
-import FormMaskField from './FormMaskField';
-import { buscarCep } from '../services/cepService';
-type CadastroFisicaProps = {
+import FormTextField from '../form/FormTextField';
+import FormNumberField from '../form/FormNumberField';
+import FormMaskField from '../form/FormMaskField';
+import { buscarCep } from '../../services/cepService';
+import Juridica from '../../models/Juridica';
+
+type CadastroJuridicaProps = {
   onSubmit: (data: any) => Promise<void>;
-  onBack: () => void;
+  juridica: Juridica | null;
 };
 
-export default function CadastroFisica(props: CadastroFisicaProps) {
-  const { onSubmit, onBack } = props;
+export default function CadastroJuridica(props: CadastroJuridicaProps) {
+  const { onSubmit, juridica } = props;
   const { handleSubmit, control, setValue } = useForm();
 
   const { fields, append, remove } = useFieldArray({
@@ -30,6 +32,14 @@ export default function CadastroFisica(props: CadastroFisicaProps) {
 
   useEffect(() => {
     if (fields.length === 0) addTelefone();
+    if (juridica) {
+      setValue('endereco', juridica.endereco);
+      setValue('razaoSocial', juridica.razaoSocial);
+      setValue('nomeFantasia', juridica.nomeFantasia);
+      setValue('cnpj', juridica.cnpj);
+      setValue('inscricao_estadual', juridica.inscricao_estadual);
+      setValue('telefones', juridica.telefones);
+    }
   }, []);
 
   const handleCep = async (evt: any) => {
@@ -50,19 +60,22 @@ export default function CadastroFisica(props: CadastroFisicaProps) {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <FormTextField name="nome" label="Nome" control={control} />
+              <FormTextField name="nomeFantasia" label="Nome Fantasia" control={control} />
             </Grid>
             <Grid item xs={12}>
-              <FormTextField name="sobrenome" label="Sobrenome" control={control} />
+              <FormTextField name="razaoSocial" label="Razão Social" control={control} />
             </Grid>
             <Grid item xs={12}>
-              <FormMaskField name="cpf" label="CPF" control={control} mask="999.999.999-99" />
+              <FormMaskField name="cnpj" label="CNPJ" control={control} mask="99.999.999/9999-99" />
             </Grid>
             <Grid item xs={12}>
-              <FormTextField name="email" label="Email" control={control} />
-            </Grid>
-            <Grid item xs={12}>
-              <FormTextField type="password" name="senha" label="Senha" control={control} />
+              <FormMaskField
+                name="inscricao_estadual"
+                label="Inscrição Estadual"
+                control={control}
+                mask="999999999"
+                rules={{ required: false }}
+              />
             </Grid>
             <Grid item xs={12}>
               <FormMaskField onBlur={handleCep} name="endereco.cep" label="CEP" control={control} mask="99999-999" />
@@ -119,11 +132,11 @@ export default function CadastroFisica(props: CadastroFisicaProps) {
             <Grid item container justifyContent="flex-end"></Grid>
           </Grid>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Button color="inherit" onClick={onBack} sx={{ mr: 1 }}>
+            <Button color="inherit" disabled={true} sx={{ mr: 1 }}>
               Voltar
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button type="submit">Salvar</Button>
+            <Button type="submit">Proximo</Button>
           </Box>
         </form>
       </Box>

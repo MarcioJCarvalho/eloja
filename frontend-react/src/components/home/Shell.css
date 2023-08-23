@@ -1,0 +1,17 @@
+.drawerHeader {
+  display: 'flex';
+  align-items: 'center';
+  padding: '16px 8px';
+  justify-content: 'flex-end';
+}
+
+
+.shellChild{
+  transition: margin 0.2s ease; 
+  margin-left: 0;
+}
+
+.shellChild.open {
+  margin-left: 240px;
+  transition: margin 0.2s ease;
+}
