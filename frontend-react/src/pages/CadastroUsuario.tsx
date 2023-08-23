@@ -6,8 +6,8 @@ import Juridica from '../models/Juridica';
 import Usuario from '../models/Usuario';
 import Fisica from '../models/Fisica';
 import Endereco from '../models/Endereco';
-import CadastroJuridica from '../components/CadastroJuridica';
-import CadastroFisica from '../components/CadastroFisica';
+import CadastroJuridica from '../components/cadastro_usuario/CadastroJuridica';
+import CadastroFisica from '../components/cadastro_usuario/CadastroFisica';
 import { salvarUsuario } from '../services/UsuarioService';
 
 export default function CadastroUsuario() {
