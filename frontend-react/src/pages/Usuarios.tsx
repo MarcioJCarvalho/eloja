@@ -18,7 +18,8 @@ import {DataSource} from "../models/DataSource";
 export class Usuarios extends Component<any, any> {
 
   state = {
-    dataSource: new DataSource()
+    dataSource: new DataSource(),
+    page: 5,
   }
 
   componentDidMount() {
@@ -35,6 +36,18 @@ export class Usuarios extends Component<any, any> {
 
   getDataSource(): DataSource {
     return this.state.dataSource;
+  }
+
+  setPage(page: number): void {
+    this.setState({page: page});
+  }
+
+  getPage(): number {
+    return this.state.page;
+  }
+
+  handleChangePage(e: unknown, page: number): void {
+    this.setPage(page);
   }
 
   render() {
@@ -74,8 +87,9 @@ export class Usuarios extends Component<any, any> {
                 <TablePagination
                   count={this.getDataSource().totalElements}
                   page={this.getDataSource().number}
-                  rowsPerPage={this.getDataSource().numberOfElements}
-                  onPageChange={() => console.log('Altera pagina')}/>
+                  rowsPerPage={this.getPage()}
+                  rowsPerPageOptions={[5, 10]}
+                  onPageChange={this.handleChangePage}/>
               </TableRow>
             </TableFooter>
           </Table>
