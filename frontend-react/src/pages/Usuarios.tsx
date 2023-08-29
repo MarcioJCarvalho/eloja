@@ -14,6 +14,8 @@ import * as React from "react";
 import {Component} from "react";
 import {getAllUsuarios} from "../services/UsuarioService";
 import {DataSource} from "../models/DataSource";
+import Button from "@mui/material/Button";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 export class Usuarios extends Component<any, any> {
 
@@ -62,6 +64,9 @@ export class Usuarios extends Component<any, any> {
         <Typography component="h1" variant="h5">
           Usuários
         </Typography>
+        <Button variant={"contained"}
+                aria-label={"botão novo"}
+                endIcon={<AddOutlinedIcon/>}>Novo</Button>
         <TableContainer component={Paper}>
           <Table aria-label={"tabela usuários"}>
             <TableHead>
