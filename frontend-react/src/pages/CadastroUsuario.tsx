@@ -9,11 +9,13 @@ import Endereco from '../models/Endereco';
 import CadastroJuridica from '../components/cadastro_usuario/CadastroJuridica';
 import CadastroFisica from '../components/cadastro_usuario/CadastroFisica';
 import { salvarUsuario } from '../services/UsuarioService';
+import {useNavigate} from "react-router-dom";
 
 export default function CadastroUsuario() {
   const steps = ['Juridica', 'Usuario'];
   const [activeStep, setActiveStep] = React.useState(0);
   const [juridica, setJuridica] = React.useState<Juridica | null>(null);
+  const navigate = useNavigate();
 
   const handleBackStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -51,7 +53,9 @@ export default function CadastroUsuario() {
     const fisica = new Fisica(nome, sobrenome, cpf, enderecoObj, telefones);
     if (juridica) {
       const usuario = new Usuario(email, senha, fisica, juridica);
-      salvarUsuario(usuario);
+      salvarUsuario(usuario).then(response => {
+        navigate('/');
+      });
     }
   };
 
