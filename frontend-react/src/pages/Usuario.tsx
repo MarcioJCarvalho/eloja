@@ -11,25 +11,44 @@ import {
   Typography
 } from "@mui/material";
 import * as React from "react";
-import {Component} from "react";
+import {Component, ReactElement} from "react";
 import {getAllUsuarios} from "../services/UsuarioService";
 import {DataSource} from "../models/DataSource";
 import Button from "@mui/material/Button";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import {UsuarioComponent} from "../components/usuario/Usuario.component";
+import TablePaginationActions from "@mui/material/TablePagination/TablePaginationActions";
 
-export class Usuarios extends Component<any, any> {
+export class Usuario extends Component<any, any> {
 
-  state = {
-    dataSource: new DataSource(),
-    page: 5,
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      dataSource: new DataSource(),
+      page: 1,
+      rowsPerPage: 5
+    };
   }
 
   componentDidMount() {
-    getAllUsuarios()
+    this.getAllUsuarios();
+  }
+
+  componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
+    if (prevState.page != this.getPage() || prevState.rowsPerPage != this.getRowsPerPage()) {
+      this.getAllUsuarios();
+    }
+  }
+
+  getAllUsuarios(): void {
+    getAllUsuarios(this.getPage(), this.getRowsPerPage())
       .then((response) => {
-        console.log(response?.data);
         this.setDataSource(response?.data);
       });
+  }
+
+  handleNewUsuario(): ReactElement {
+    return <UsuarioComponent></UsuarioComponent>;
   }
 
   setDataSource(data: DataSource): void {
@@ -40,6 +59,10 @@ export class Usuarios extends Component<any, any> {
     return this.state.dataSource;
   }
 
+  getRowsPerPage(): number {
+    return this.state.rowsPerPage;
+  }
+
   setPage(page: number): void {
     this.setState({page: page});
   }
@@ -48,7 +71,7 @@ export class Usuarios extends Component<any, any> {
     return this.state.page;
   }
 
-  handleChangePage(e: unknown, page: number): void {
+  handleChangePage = (e: React.MouseEvent<HTMLButtonElement> | null, page: number) => {
     this.setPage(page);
   }
 
@@ -90,11 +113,12 @@ export class Usuarios extends Component<any, any> {
             <TableFooter>
               <TableRow>
                 <TablePagination
+                  rowsPerPage={this.getRowsPerPage()}
+                  rowsPerPageOptions={[5, 10]}
                   count={this.getDataSource().totalElements}
                   page={this.getDataSource().number}
-                  rowsPerPage={this.getPage()}
-                  rowsPerPageOptions={[5, 10]}
-                  onPageChange={this.handleChangePage}/>
+                  onPageChange={this.handleChangePage}
+                  ActionsComponent={TablePaginationActions}/>
               </TableRow>
             </TableFooter>
           </Table>
