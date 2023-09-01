@@ -19,11 +19,15 @@ import TablePaginationActions from "@mui/material/TablePagination/TablePaginatio
 import {AddOutlined, DeleteOutlined, EditOutlined} from "@mui/icons-material";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import ColaboradorDialog from "../components/cadastro_usuario/ColaboradorDialog";
+import Usuario from "../models/Usuario";
 
-export default function UsuarioPage() {
+export default function ColaboradorPage() {
 
   const [dataSource, setDataSource] = useState(new DataSource());
   const [pageActions, setPageActions] = useState({page: 0, rowsPerPage: 5});
+  const [openDialog, setOpenDialog] = useState(false);
+  const [usuario, setUsuario] = useState(new Usuario());
 
   // DidMount
   useEffect(() => {
@@ -52,8 +56,9 @@ export default function UsuarioPage() {
     });
   };
 
-  const handleEdit = () => {
-
+  const handleEdit = (usuario: Usuario) => {
+    setUsuario(usuario);
+    setOpenDialog(true);
   };
 
   const handlePageChange = (e: React.MouseEvent<HTMLButtonElement> | null, page: number) => {
@@ -94,7 +99,7 @@ export default function UsuarioPage() {
                   <TableCell>{row.email}</TableCell>
                   <TableCell>{row.fisica.cpf}</TableCell>
                   <TableCell>
-                    <IconButton aria-label={"botão editar"}><EditOutlined/></IconButton>
+                    <IconButton aria-label={"botão editar"} onClick={() => handleEdit(row)}><EditOutlined/></IconButton>
                     <IconButton aria-label={"botão deletar"} onClick={() => handleDelete(row.id)}><DeleteOutlined/></IconButton>
                   </TableCell>
                 </TableRow>
@@ -113,6 +118,7 @@ export default function UsuarioPage() {
             </TableFooter>
           </Table>
         </TableContainer>
+        <ColaboradorDialog open={openDialog} close={() => setOpenDialog(false)} usuario={usuario}/>
         <ToastContainer />
       </Box>
     </Container>
