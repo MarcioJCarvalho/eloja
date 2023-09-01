@@ -61,6 +61,10 @@ export default function ColaboradorPage() {
     setOpenDialog(true);
   };
 
+  const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPageActions({page: 0, rowsPerPage: parseInt(e.target.value, 10)});
+  };
+
   const handlePageChange = (e: React.MouseEvent<HTMLButtonElement> | null, page: number) => {
     setPageActions({...pageActions, page: page});
   };
@@ -110,6 +114,7 @@ export default function ColaboradorPage() {
                 <TablePagination
                   rowsPerPage={pageActions.rowsPerPage}
                   rowsPerPageOptions={[5, 10]}
+                  onRowsPerPageChange={handleRowsPerPageChange}
                   count={dataSource.totalElements}
                   page={dataSource.number}
                   onPageChange={handlePageChange}
