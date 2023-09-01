@@ -1,6 +1,6 @@
 import {
   Box,
-  Container,
+  Container, IconButton,
   Paper,
   Table,
   TableBody,
@@ -11,72 +11,41 @@ import {
   Typography
 } from "@mui/material";
 import * as React from "react";
-import {Component, ReactElement} from "react";
+import {Component, ReactElement, useEffect, useState} from "react";
 import {getAllUsuarios} from "../services/UsuarioService";
 import {DataSource} from "../models/DataSource";
 import Button from "@mui/material/Button";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import {UsuarioComponent} from "../components/usuario/Usuario.component";
 import TablePaginationActions from "@mui/material/TablePagination/TablePaginationActions";
+import {AddOutlined, DeleteOutlined, EditOutlined} from "@mui/icons-material";
 
-export class Usuario extends Component<any, any> {
+export default function UsuarioPage() {
 
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      dataSource: new DataSource(),
-      page: 1,
-      rowsPerPage: 5
-    };
-  }
+  const [dataSource, setDataSource] = useState(new DataSource());
+  const [pageActions, setPageActions] = useState({page: 0, rowsPerPage: 5});
 
-  componentDidMount() {
-    this.getAllUsuarios();
-  }
+  // DidMount
+  useEffect(() => {
+    getUsuarios();
+  }, []);
 
-  componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
-    if (prevState.page != this.getPage() || prevState.rowsPerPage != this.getRowsPerPage()) {
-      this.getAllUsuarios();
-    }
-  }
+  // DidUpdate
+  useEffect(() => {
+    getUsuarios();
+  }, [pageActions]);
 
-  getAllUsuarios(): void {
-    getAllUsuarios(this.getPage(), this.getRowsPerPage())
+  const getUsuarios = () => {
+    getAllUsuarios(pageActions.page, pageActions.rowsPerPage)
       .then((response) => {
-        this.setDataSource(response?.data);
+        setDataSource(response?.data);
       });
-  }
+  };
 
-  handleNewUsuario(): ReactElement {
-    return <UsuarioComponent></UsuarioComponent>;
-  }
+  const handlePageChange = (e: React.MouseEvent<HTMLButtonElement> | null, page: number) => {
+    setPageActions({...pageActions, page: page});
+  };
 
-  setDataSource(data: DataSource): void {
-    this.setState({dataSource: data});
-  }
-
-  getDataSource(): DataSource {
-    return this.state.dataSource;
-  }
-
-  getRowsPerPage(): number {
-    return this.state.rowsPerPage;
-  }
-
-  setPage(page: number): void {
-    this.setState({page: page});
-  }
-
-  getPage(): number {
-    return this.state.page;
-  }
-
-  handleChangePage = (e: React.MouseEvent<HTMLButtonElement> | null, page: number) => {
-    this.setPage(page);
-  }
-
-  render() {
-    return <Container component="main" maxWidth="md" sx={{ marginY: '3rem' }}>
+  return (
+    <Container component="main" maxWidth="md" sx={{marginY: '3rem'}}>
       <Box
         sx={{
           display: 'flex',
@@ -89,7 +58,7 @@ export class Usuario extends Component<any, any> {
         </Typography>
         <Button variant={"contained"}
                 aria-label={"botão novo"}
-                endIcon={<AddOutlinedIcon/>}>Novo</Button>
+                endIcon={<AddOutlined/>}>Novo</Button>
         <TableContainer component={Paper}>
           <Table aria-label={"tabela usuários"}>
             <TableHead>
@@ -98,26 +67,31 @@ export class Usuario extends Component<any, any> {
                 <TableCell>Nome</TableCell>
                 <TableCell>E-mail</TableCell>
                 <TableCell>CPF</TableCell>
+                <TableCell>Ações</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.getDataSource().content.map(row => (
+              {dataSource.content.map(row => (
                 <TableRow key={row.id}>
                   <TableCell>{row.id}</TableCell>
                   <TableCell>{row.fisica.nome} {row.fisica.sobrenome}</TableCell>
                   <TableCell>{row.email}</TableCell>
                   <TableCell>{row.fisica.cpf}</TableCell>
+                  <TableCell>
+                    <IconButton aria-label={"botão editar"}><EditOutlined/></IconButton>
+                    <IconButton aria-label={"botão deletar"}><DeleteOutlined/></IconButton>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
             <TableFooter>
               <TableRow>
                 <TablePagination
-                  rowsPerPage={this.getRowsPerPage()}
+                  rowsPerPage={pageActions.rowsPerPage}
                   rowsPerPageOptions={[5, 10]}
-                  count={this.getDataSource().totalElements}
-                  page={this.getDataSource().number}
-                  onPageChange={this.handleChangePage}
+                  count={dataSource.totalElements}
+                  page={dataSource.number}
+                  onPageChange={handlePageChange}
                   ActionsComponent={TablePaginationActions}/>
               </TableRow>
             </TableFooter>
@@ -125,5 +99,5 @@ export class Usuario extends Component<any, any> {
         </TableContainer>
       </Box>
     </Container>
-  }
+  );
 }

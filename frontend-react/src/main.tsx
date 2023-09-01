@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashboard from './pages/Dashboard';
 import CadastroEmpresa from './pages/CadastroUsuario';
 import Shell from './components/home/Shell';
-import {Usuarios} from "./pages/Usuarios";
+import UsuarioPage from "./pages/UsuarioPage";
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Route path="/" element={<Shell />}>
         <Route index element={<Dashboard />} />
         <Route path="/cadastro-empresa" element={<CadastroEmpresa />} />
-        <Route path="/usuarios" element={<Usuarios />} />
+        <Route path="/usuarios" element={<UsuarioPage />} />
       </Route>
     </Routes>
   </BrowserRouter>,

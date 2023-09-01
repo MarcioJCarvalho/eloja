@@ -91,9 +91,13 @@ function Shell() {
                 setOpen(false);
               }}
             >
-              <ListItemText primary="Usuários" />
+              <ListItemText primary="Colaboradores" />
             </ListItemButton>
-          </ListItem>
+          </ListItem><ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText primary="Produtos" />
+          </ListItemButton>
+        </ListItem>
         </List>
         <Divider />
       </Drawer>

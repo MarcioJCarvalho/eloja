@@ -10,6 +10,7 @@ import CadastroJuridica from '../components/cadastro_usuario/CadastroJuridica';
 import CadastroFisica from '../components/cadastro_usuario/CadastroFisica';
 import { salvarUsuario } from '../services/UsuarioService';
 import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 export default function CadastroUsuario() {
   const steps = ['Juridica', 'Usuario'];
@@ -55,6 +56,8 @@ export default function CadastroUsuario() {
       const usuario = new Usuario(email, senha, fisica, juridica);
       salvarUsuario(usuario).then(response => {
         navigate('/');
+      }).catch(error => {
+        toast.error("Erro ao cadastrar usuário!");
       });
     }
   };
