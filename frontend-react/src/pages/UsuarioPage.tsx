@@ -11,12 +11,14 @@ import {
   Typography
 } from "@mui/material";
 import * as React from "react";
-import {Component, ReactElement, useEffect, useState} from "react";
-import {getAllUsuarios} from "../services/UsuarioService";
+import {useEffect, useState} from "react";
+import {deletarUsuario, getAllUsuarios} from "../services/UsuarioService";
 import {DataSource} from "../models/DataSource";
 import Button from "@mui/material/Button";
 import TablePaginationActions from "@mui/material/TablePagination/TablePaginationActions";
 import {AddOutlined, DeleteOutlined, EditOutlined} from "@mui/icons-material";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function UsuarioPage() {
 
@@ -38,6 +40,20 @@ export default function UsuarioPage() {
       .then((response) => {
         setDataSource(response?.data);
       });
+  };
+
+  const handleDelete = (id: number) => {
+    deletarUsuario(id)
+      .then(response => {
+        toast.success("Sucesso ao deletar usuário!");
+      })
+      .catch(error => {
+        toast.error("Erro ao deletar usuário!");
+    });
+  };
+
+  const handleEdit = () => {
+
   };
 
   const handlePageChange = (e: React.MouseEvent<HTMLButtonElement> | null, page: number) => {
@@ -79,7 +95,7 @@ export default function UsuarioPage() {
                   <TableCell>{row.fisica.cpf}</TableCell>
                   <TableCell>
                     <IconButton aria-label={"botão editar"}><EditOutlined/></IconButton>
-                    <IconButton aria-label={"botão deletar"}><DeleteOutlined/></IconButton>
+                    <IconButton aria-label={"botão deletar"} onClick={() => handleDelete(row.id)}><DeleteOutlined/></IconButton>
                   </TableCell>
                 </TableRow>
               ))}
@@ -97,6 +113,7 @@ export default function UsuarioPage() {
             </TableFooter>
           </Table>
         </TableContainer>
+        <ToastContainer />
       </Box>
     </Container>
   );
