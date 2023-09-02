@@ -71,13 +71,7 @@ export default function ColaboradorPage() {
 
   return (
     <Container component="main" maxWidth="md" sx={{marginY: '3rem'}}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
+      <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <Typography component="h1" variant="h5">
           Usuários
         </Typography>
