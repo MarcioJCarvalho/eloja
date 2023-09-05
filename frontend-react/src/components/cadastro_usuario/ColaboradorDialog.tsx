@@ -1,6 +1,5 @@
 import {Dialog, DialogActions, DialogContent, DialogTitle, IconButton} from "@mui/material";
 import Button from "@mui/material/Button";
-import {CloseOutlined} from "@mui/icons-material";
 import Usuario from "../../models/Usuario";
 import {useForm} from "react-hook-form";
 import Grid from "@mui/material/Grid";
@@ -16,7 +15,7 @@ export default function ColaboradorDialog(props: any) {
 
   // DidMount
   useEffect(() => {
-    handleTitle(props.usuario);
+    handleTitle(props.value);
   }, []);
 
   const handleTitle = (usuario: Usuario) => {

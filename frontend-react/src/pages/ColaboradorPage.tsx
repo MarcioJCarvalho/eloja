@@ -61,6 +61,10 @@ export default function ColaboradorPage() {
     setOpenDialog(true);
   };
 
+  const handleCloseDialog = () => {
+    setOpenDialog(false)
+  };
+
   const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPageActions({page: 0, rowsPerPage: parseInt(e.target.value, 10)});
   };
@@ -117,7 +121,7 @@ export default function ColaboradorPage() {
             </TableFooter>
           </Table>
         </TableContainer>
-        <ColaboradorDialog open={openDialog} close={() => setOpenDialog(false)} usuario={usuario}/>
+        <ColaboradorDialog open={openDialog} close={handleCloseDialog} value={usuario}/>
         <ToastContainer />
       </Box>
     </Container>
