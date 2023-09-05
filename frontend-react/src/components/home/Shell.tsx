@@ -1,7 +1,6 @@
-import React, { useState, ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Divider,
@@ -47,7 +46,14 @@ function Shell() {
             </Typography>
           </Button>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
-          <Button color="inherit">Login</Button>
+          <Button
+            onClick={() => {
+              navigate('/login');
+            }}
+            color="inherit"
+          >
+            Login
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
