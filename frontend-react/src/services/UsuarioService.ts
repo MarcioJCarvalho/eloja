@@ -1,10 +1,17 @@
 import api from '../axios/Api';
 import Usuario from '../models/Usuario';
+import {stringify} from "querystring";
 
 const path = '/usuarios';
 
-export const getAllUsuarios = async () => {
-  return await api.get(path).catch((err) => {
+export const getAllUsuarios = async (page: number, rowsPerPage: number) => {
+  const params = new URLSearchParams();
+  params.append('page', page.toString());
+  params.append('size', rowsPerPage.toString());
+
+  return await api.get(path, {
+      params
+    }).catch((err) => {
     console.error('ocorreu um erro' + err);
   });
 };
