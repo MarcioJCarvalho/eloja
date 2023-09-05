@@ -91,10 +91,19 @@ function Shell() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="Item2" />
+            <ListItemButton
+              onClick={() => {
+                navigate('/usuarios');
+                setOpen(false);
+              }}
+            >
+              <ListItemText primary="Colaboradores" />
             </ListItemButton>
-          </ListItem>
+          </ListItem><ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText primary="Produtos" />
+          </ListItemButton>
+        </ListItem>
         </List>
         <Divider />
       </Drawer>
