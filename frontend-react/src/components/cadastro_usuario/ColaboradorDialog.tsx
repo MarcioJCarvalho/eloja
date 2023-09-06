@@ -8,15 +8,16 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import FormMaskField from "../form/FormMaskField";
 
-export default function ColaboradorDialog(props: any) {
+export default function ColaboradorDialog({close, open, value}: any) {
 
   const [title, setTitle] = useState("Novo Colaborador");
-  const {control, setValue} = useForm(props.usuario);
+  const {handleSubmit, control, setValue, reset} = useForm({defaultValues: value});
 
-  // DidMount
+  // DidUpdate
   useEffect(() => {
-    handleTitle(props.value);
-  }, []);
+    reset(value);
+    handleTitle(value);
+  }, [value]);
 
   const handleTitle = (usuario: Usuario) => {
     if (usuario && usuario.id) {
@@ -24,26 +25,20 @@ export default function ColaboradorDialog(props: any) {
     }
   };
 
-  const handleSubmit = () => {
-
-  };
-
   return (
-    <Dialog open={props.open}>
-      <DialogTitle>
-        <DialogTitle>{title}</DialogTitle>
-      </DialogTitle>
-      <DialogContent>
-        <form onSubmit={handleSubmit}>
+    <Dialog maxWidth={'md'} open={open}>
+      <DialogTitle>{title}</DialogTitle>
+      <DialogContent dividers>
+        <form onSubmit={(() => {})}>
           <Grid container spacing={2}>
             <Grid item xs={6} aria-label={"campo nome"}>
-              <FormTextField control={control} name={"nome"} label={"Nome"}/>
+              <FormTextField control={control} name={"fisica.nome"} label={"Nome"}/>
             </Grid>
             <Grid item xs={6} aria-label={"campo sobrenome"}>
-              <FormTextField control={control} name={"sobrenome"} label={"Sobrenome"}/>
+              <FormTextField control={control} name={"fisica.sobrenome"} label={"Sobrenome"}/>
             </Grid>
             <Grid item xs={12} aria-label={"campo cpf"}>
-              <FormTextField control={control} name={"cpf"} label={"CPF"}/>
+              <FormTextField control={control} name={"fisica.cpf"} label={"CPF"}/>
             </Grid>
             <Grid item xs={6} aria-label={"campo e-mail"}>
               <FormTextField control={control} name={"email"} label={"E-mail"}/>
@@ -52,31 +47,31 @@ export default function ColaboradorDialog(props: any) {
               <FormTextField control={control} name={"senha"} label={"Senha"} type={"password"}/>
             </Grid>
             <Grid item xs={3}>
-              <FormMaskField control={control} name={"cep"} label={"CEP"} mask={"99999-999"}/>
+              <FormMaskField control={control} name={"fisica.endereco.cep"} label={"CEP"} mask={"99999-999"}/>
             </Grid>
             <Grid item xs={9}>
-              <FormTextField control={control} name={"logradouro"} label={"Logradouro"}/>
+              <FormTextField control={control} name={"fisica.endereco.logradouro"} label={"Logradouro"}/>
             </Grid>
             <Grid item xs={3}>
-              <FormTextField control={control} name={"numero"} label={"Número"}/>
+              <FormTextField control={control} name={"fisica.endereco.numero"} label={"Número"}/>
             </Grid>
             <Grid item xs={9}>
-              <FormTextField control={control} name={"complemento"} label={"Complemento"}/>
+              <FormTextField control={control} name={"fisica.endereco.complemento"} label={"Complemento"}/>
             </Grid>
             <Grid item xs={8}>
-              <FormTextField control={control} name={"bairro"} label={"Bairro"}/>
+              <FormTextField control={control} name={"fisica.endereco.bairro"} label={"Bairro"}/>
             </Grid>
             <Grid item xs={2}>
-              <FormTextField control={control} name={"ibge"} label={"IBGE"}/>
+              <FormTextField control={control} name={"fisica.endereco.ibge"} label={"IBGE"}/>
             </Grid>
             <Grid item xs={2}>
-              <FormTextField control={control} name={"uf"} label={"UF"}/>
+              <FormTextField control={control} name={"fisica.endereco.uf"} label={"UF"}/>
             </Grid>
           </Grid>
         </form>
       </DialogContent>
       <DialogActions>
-        <Button color={'secondary'} onClick={props.close}>Cancelar</Button>
+        <Button color={'secondary'} onClick={close}>Cancelar</Button>
         <Button>Salvar</Button>
       </DialogActions>
     </Dialog>
