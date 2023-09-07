@@ -17,7 +17,7 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Fisica fisica;
 
     @OneToOne(cascade = CascadeType.PERSIST)
