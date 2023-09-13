@@ -19,7 +19,7 @@ public class Fisica extends Pessoa{
     @Column(nullable = false)
     private String sobrenome;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String cpf;
 
 }
