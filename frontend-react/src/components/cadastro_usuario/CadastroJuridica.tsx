@@ -12,7 +12,7 @@ import FormMaskField from '../form/FormMaskField';
 import { buscarCep } from '../../services/cepService';
 import Juridica from '../../models/Juridica';
 
-type CadastroJuridicaProps = {
+export type CadastroJuridicaProps = {
   onSubmit: (data: any) => Promise<void>;
   juridica: Juridica | null;
 };

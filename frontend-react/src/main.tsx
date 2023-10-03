@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import CadastroEmpresa from './pages/CadastroUsuario';
 import Shell from './components/home/Shell';
 import ColaboradorPage from "./pages/ColaboradorPage";
+import  PerfilEmpresa from "./pages/PerfilEmpresa"
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route index element={<Dashboard />} />
         <Route path="/cadastro-empresa" element={<CadastroEmpresa />} />
         <Route path="/usuarios" element={<ColaboradorPage />} />
+        <Route path="/perfil-empresa" element={<PerfilEmpresa />} />
       </Route>
     </Routes>
   </BrowserRouter>,

@@ -77,6 +77,16 @@ function Shell() {
           <ListItem disablePadding>
             <ListItemButton
               onClick={() => {
+                navigate('/perfil-empresa');
+                setOpen(false);
+              }}
+            >
+              <ListItemText primary="Perfil" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              onClick={() => {
                 navigate('/cadastro-empresa');
                 setOpen(false);
               }}
@@ -94,10 +104,10 @@ function Shell() {
               <ListItemText primary="Colaboradores" />
             </ListItemButton>
           </ListItem><ListItem disablePadding>
-          <ListItemButton>
-            <ListItemText primary="Produtos" />
-          </ListItemButton>
-        </ListItem>
+            <ListItemButton>
+              <ListItemText primary="Produtos" />
+            </ListItemButton>
+          </ListItem>
         </List>
         <Divider />
       </Drawer>
