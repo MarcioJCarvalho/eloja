@@ -15,4 +15,6 @@ public interface UsuarioService {
     ResponseEntity<String> excluir(Integer usuarioId);
 
     ResponseEntity<Page<UsuarioDTO>> listarTodos(Pageable pageable);
+
+    ResponseEntity<UsuarioDTO> getUserById(Integer id);
 }

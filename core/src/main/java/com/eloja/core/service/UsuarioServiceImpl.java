@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
@@ -47,6 +49,13 @@ public class UsuarioServiceImpl implements UsuarioService {
                 usuario -> ParseUtils.parse(usuario, UsuarioDTO.class)
         );
         return new ResponseEntity<>(resultadoDTO, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<UsuarioDTO> getUserById(Integer id) {
+        Optional<Usuario> resultado = usuarioRepository.findById(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(ParseUtils.parse(resultado, UsuarioDTO.class));
     }
 
 

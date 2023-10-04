@@ -39,5 +39,10 @@ public class UsuarioController {
         return usuarioService.listarTodos(pageable);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> getUserById(@RequestParam Integer id){
+        return usuarioService.getUserById(id);
+    }
+
 
 }
