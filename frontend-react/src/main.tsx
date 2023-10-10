@@ -4,8 +4,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashboard from './pages/Dashboard';
 import CadastroEmpresa from './pages/CadastroUsuario';
+import Login from './pages/Login';
 import Shell from './components/home/Shell';
-import ColaboradorPage from "./pages/ColaboradorPage";
+import ColaboradorPage from './pages/ColaboradorPage';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route index element={<Dashboard />} />
         <Route path="/cadastro-empresa" element={<CadastroEmpresa />} />
         <Route path="/usuarios" element={<ColaboradorPage />} />
+        <Route path="/login" element={<Login />} />
       </Route>
     </Routes>
   </BrowserRouter>,
