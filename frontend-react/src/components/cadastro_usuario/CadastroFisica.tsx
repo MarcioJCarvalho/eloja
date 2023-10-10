@@ -102,7 +102,7 @@ export default function CadastroFisica(props: CadastroFisicaProps) {
                 </Grid>
                 {index > 0 ? (
                   <Grid item xs={3} key={field.id}>
-                    <Button onClick={() => remove(index)} variant="contained" color="error" sx={{ mt: 0.5, mb: 2 }}>
+                    <Button onClick={() => remove(index)} variant="outlined" color="error" sx={{ mt: 0.5, mb: 2 }}>
                       Remover Telefone
                     </Button>
                   </Grid>
@@ -112,7 +112,7 @@ export default function CadastroFisica(props: CadastroFisicaProps) {
               </>
             ))}
             <Grid item container justifyContent="flex-end">
-              <Button onClick={addTelefone} variant="contained">
+              <Button onClick={addTelefone} variant="outlined">
                 Adicionar Telefone
               </Button>
             </Grid>

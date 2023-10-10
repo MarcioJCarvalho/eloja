@@ -46,6 +46,16 @@ export default function ColaboradorPage() {
       });
   };
 
+  const handleCreate = () => {
+    setUsuario(new Usuario());
+    setOpenDialog(true);
+  };
+
+  const handleUpdate = (usuario: Usuario) => {
+    setUsuario(usuario);
+    setOpenDialog(true);
+  };
+
   const handleDelete = (id: number) => {
     deletarUsuario(id)
       .then(response => {
@@ -56,13 +66,17 @@ export default function ColaboradorPage() {
     });
   };
 
-  const handleEdit = (usuario: Usuario) => {
-    setUsuario(usuario);
-    setOpenDialog(true);
-  };
-
   const handleCloseDialog = () => {
     setOpenDialog(false)
+  };
+
+  const resetPageActions = () => {
+    setPageActions({page: 0, rowsPerPage: 5});
+  }
+
+  const handleSubmitDialog = () => {
+    resetPageActions();
+    getUsuarios();
   };
 
   const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,12 +90,13 @@ export default function ColaboradorPage() {
   return (
     <Container component="main" maxWidth="md" sx={{marginY: '3rem'}}>
       <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <Typography component="h1" variant="h5">
-          Usuários
+        <Typography component="h2" variant="h5">
+          Colaboradores
         </Typography>
-        <Button variant={"contained"}
+        <Button variant={"outlined"}
                 aria-label={"botão novo"}
-                endIcon={<AddOutlined/>}>Novo</Button>
+                endIcon={<AddOutlined/>}
+                onClick={handleCreate}>Novo</Button>
         <TableContainer component={Paper}>
           <Table aria-label={"tabela usuários"}>
             <TableHead>
@@ -101,7 +116,7 @@ export default function ColaboradorPage() {
                   <TableCell>{row.email}</TableCell>
                   <TableCell>{row.fisica.cpf}</TableCell>
                   <TableCell>
-                    <IconButton aria-label={"botão editar"} onClick={() => handleEdit(row)}><EditOutlined/></IconButton>
+                    <IconButton aria-label={"botão editar"} onClick={() => handleUpdate(row)}><EditOutlined/></IconButton>
                     <IconButton aria-label={"botão deletar"} onClick={() => handleDelete(row.id)}><DeleteOutlined/></IconButton>
                   </TableCell>
                 </TableRow>
@@ -121,8 +136,8 @@ export default function ColaboradorPage() {
             </TableFooter>
           </Table>
         </TableContainer>
-        <ColaboradorDialog open={openDialog} close={handleCloseDialog} value={usuario}/>
-        <ToastContainer />
+        <ColaboradorDialog open={openDialog} close={handleCloseDialog} submit={handleSubmitDialog} value={usuario}/>
+        <ToastContainer/>
       </Box>
     </Container>
   );

@@ -8,12 +8,12 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import FormMaskField from "../form/FormMaskField";
 import {buscarCep} from "../../services/cepService";
-import {atualizarUsuario} from "../../services/UsuarioService";
+import {atualizarUsuario, salvarUsuario} from "../../services/UsuarioService";
 import {toast} from "react-toastify";
 
-export default function ColaboradorDialog({close, open, value}: any) {
+export default function ColaboradorDialog({open, close, submit, value}: any) {
 
-  const [title, setTitle] = useState("Novo Colaborador");
+  const [title, setTitle] = useState<string>();
   const {handleSubmit, control, setValue, reset} = useForm<Usuario>({defaultValues: value});
 
   // DidUpdate
@@ -29,6 +29,8 @@ export default function ColaboradorDialog({close, open, value}: any) {
   const handleTitle = () => {
     if (isUpdate()) {
       setTitle("Editar Colaborador");
+    } else {
+      setTitle("Novo Colaborador");
     }
   };
 
@@ -43,8 +45,19 @@ export default function ColaboradorDialog({close, open, value}: any) {
       });
   };
 
-  const onSubmit: SubmitHandler<Usuario> = (data) => {
-    atualizarUsuario(data)
+  const create = (usuario: Usuario) => {
+    salvarUsuario(usuario)
+      .then((response) => {
+        toast.success("Sucesso ao salvar usuário!");
+      })
+      .catch((error) => {
+        toast.error("Erro ao salvar usuário!");
+        console.error(error);
+      });
+  };
+
+  const update = (usuario: Usuario) => {
+    atualizarUsuario(usuario)
       .then((response) => {
         toast.success("Sucesso ao atualizar usuário!");
       })
@@ -52,6 +65,16 @@ export default function ColaboradorDialog({close, open, value}: any) {
         toast.error("Erro ao atualizar usuário!");
         console.error(error);
       });
+  };
+
+  const onSubmit: SubmitHandler<Usuario> = async (data) => {
+    if (isUpdate()) {
+      await update(data);
+    } else {
+      await create(data);
+    }
+    close();
+    submit();
   };
 
   const onError = () => {
