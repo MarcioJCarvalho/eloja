@@ -60,6 +60,7 @@ export default function ColaboradorPage() {
     deletarUsuario(id)
       .then(response => {
         toast.success("Sucesso ao deletar usuário!");
+        getUsuarios();
       })
       .catch(error => {
         toast.error("Erro ao deletar usuário!");
@@ -68,6 +69,7 @@ export default function ColaboradorPage() {
 
   const handleCloseDialog = () => {
     setOpenDialog(false)
+    getUsuarios();
   };
 
   const resetPageActions = () => {

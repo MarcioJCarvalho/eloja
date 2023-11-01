@@ -48,7 +48,11 @@ export default function ColaboradorDialog({open, close, submit, value}: any) {
   const create = (usuario: Usuario) => {
     salvarUsuario(usuario)
       .then((response) => {
-        toast.success("Sucesso ao salvar usuário!");
+        if (response) {
+          toast.success("Sucesso ao salvar usuário!");
+        } else {
+          toast.error("Erro ao salvar usuário!");
+        }
       })
       .catch((error) => {
         toast.error("Erro ao salvar usuário!");
@@ -59,7 +63,11 @@ export default function ColaboradorDialog({open, close, submit, value}: any) {
   const update = (usuario: Usuario) => {
     atualizarUsuario(usuario)
       .then((response) => {
-        toast.success("Sucesso ao atualizar usuário!");
+        if (response) {
+          toast.success("Sucesso ao atualizar usuário!");
+        } else {
+          toast.error("Erro ao atualizar usuário!");
+        }
       })
       .catch((error) => {
         toast.error("Erro ao atualizar usuário!");
