@@ -90,7 +90,7 @@ export default function ColaboradorPage() {
   };
 
   return (
-    <Container component="main" maxWidth="md" sx={{marginY: '3rem'}}>
+    <Container component="main" maxWidth="xl" sx={{marginY: '3rem'}}>
       <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <Typography component="h2" variant="h5">
           Colaboradores
