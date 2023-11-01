@@ -10,8 +10,10 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  ThemeProvider,
   Toolbar,
   Typography,
+  createTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -26,8 +28,18 @@ function Shell() {
     setOpen(!open);
   };
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#5bfa61',
+      },
+      secondary: {
+        main: '#0FEEFA',
+      },
+    },
+  });
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <AppBar position="static" className={open ? 'shellChild open' : 'shellChild'}>
         <Toolbar>
           <IconButton
@@ -99,18 +111,24 @@ function Shell() {
             >
               <ListItemText primary="Colaboradores" />
             </ListItemButton>
-          </ListItem><ListItem disablePadding>
-          <ListItemButton>
-            <ListItemText primary="Produtos" />
-          </ListItemButton>
-        </ListItem>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              onClick={() => {
+                navigate('/produtos');
+                setOpen(false);
+              }}
+            >
+              <ListItemText primary="Produtos" />
+            </ListItemButton>
+          </ListItem>
         </List>
         <Divider />
       </Drawer>
       <div className={open ? 'shellChild open' : 'shellChild'}>
         <Outlet />
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 
