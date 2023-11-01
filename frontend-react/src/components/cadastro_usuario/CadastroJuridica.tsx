@@ -11,6 +11,7 @@ import FormNumberField from '../form/FormNumberField';
 import FormMaskField from '../form/FormMaskField';
 import { buscarCep } from '../../services/cepService';
 import Juridica from '../../models/Juridica';
+import { Typography } from '@mui/material';
 
 type CadastroJuridicaProps = {
   onSubmit: (data: any) => Promise<void>;
@@ -48,7 +49,7 @@ export default function CadastroJuridica(props: CadastroJuridicaProps) {
   };
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container maxWidth="xl" component="main">
       <Box
         sx={{
           marginTop: 8,
@@ -58,17 +59,22 @@ export default function CadastroJuridica(props: CadastroJuridicaProps) {
         }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Grid container spacing={2}>
+          <Grid container maxWidth="xl" spacing={2} sx={{ marginBottom: '2rem' }}>
             <Grid item xs={12}>
+              <Typography component="h6" variant="h6">
+                Dados da empresa:
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
               <FormTextField name="nomeFantasia" label="Nome Fantasia" control={control} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} md={6}>
               <FormTextField name="razaoSocial" label="Razão Social" control={control} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} md={3}>
               <FormMaskField name="cnpj" label="CNPJ" control={control} mask="99.999.999/9999-99" />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} md={3}>
               <FormMaskField
                 name="inscricao_estadual"
                 label="Inscrição Estadual"
@@ -77,35 +83,9 @@ export default function CadastroJuridica(props: CadastroJuridicaProps) {
                 rules={{ required: false }}
               />
             </Grid>
-            <Grid item xs={12}>
-              <FormMaskField onBlur={handleCep} name="endereco.cep" label="CEP" control={control} mask="99999-999" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormTextField name="endereco.logradouro" label="Logradouro" control={control} />
-            </Grid>
-            <Grid item xs={12}>
-              <FormNumberField name="endereco.numero" label="Numero" control={control} />
-            </Grid>
-            <Grid item xs={12}>
-              <FormTextField
-                name="endereco.complemento"
-                label="Complemento"
-                control={control}
-                rules={{ required: false }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormTextField name="endereco.bairro" label="Bairro" control={control} />
-            </Grid>
-            <Grid item xs={12}>
-              <FormTextField name="endereco.ibge" label="IBGE" control={control} />
-            </Grid>
-            <Grid item xs={12}>
-              <FormTextField name="endereco.uf" label="UF" control={control} />
-            </Grid>
             {fields.map((field, index) => (
               <>
-                <Grid item xs={index > 0 ? 9 : 12} key={field.id}>
+                <Grid item xs={12} md={index > 0 ? 6 : 4} key={field.id}>
                   <FormMaskField
                     name={`telefones[${index}].numero`}
                     label={'Telefone'}
@@ -114,8 +94,8 @@ export default function CadastroJuridica(props: CadastroJuridicaProps) {
                   />
                 </Grid>
                 {index > 0 ? (
-                  <Grid item xs={3} key={field.id}>
-                    <Button onClick={() => remove(index)} variant="outlined" color="error" sx={{ mt: 0.5, mb: 2 }}>
+                  <Grid item xs={2} key={field.id}>
+                    <Button onClick={() => remove(index)} variant="contained" color="error" sx={{ mt: 0.5, mb: 2 }}>
                       Remover Telefone
                     </Button>
                   </Grid>
@@ -124,19 +104,51 @@ export default function CadastroJuridica(props: CadastroJuridicaProps) {
                 )}
               </>
             ))}
-            <Grid item container justifyContent="flex-end">
-              <Button onClick={addTelefone} variant="outlined">
+            <Grid item xs={2} justifyContent="flex-end">
+              <Button onClick={addTelefone} variant="contained">
                 Adicionar Telefone
               </Button>
             </Grid>
-            <Grid item container justifyContent="flex-end"></Grid>
+            <Grid item xs={12}>
+              <Typography component="h6" variant="h6">
+                Endereco:
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <FormMaskField onBlur={handleCep} name="endereco.cep" label="CEP" control={control} mask="99999-999" />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <FormTextField name="endereco.logradouro" label="Logradouro" control={control} />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <FormNumberField name="endereco.numero" label="Numero" control={control} />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <FormTextField
+                name="endereco.complemento"
+                label="Complemento"
+                control={control}
+                rules={{ required: false }}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <FormTextField name="endereco.bairro" label="Bairro" control={control} />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <FormTextField name="endereco.ibge" label="IBGE" control={control} />
+            </Grid>
+            <Grid item xs={12} md={2}>
+              <FormTextField name="endereco.uf" label="UF" control={control} />
+            </Grid>
           </Grid>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Button color="inherit" disabled={true} sx={{ mr: 1 }}>
+            <Button variant="contained" color="inherit" disabled={true} sx={{ mr: 1 }}>
               Voltar
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button type="submit">Proximo</Button>
+            <Button variant="contained" type="submit">
+              Proximo
+            </Button>
           </Box>
         </form>
       </Box>
